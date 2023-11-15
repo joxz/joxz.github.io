@@ -1,0 +1,80 @@
+site_name: cloud and networking stuff
+site_url: https://joxz.github.io
+theme:
+  name: material
+  logo: assets/favicon.ico
+  palette:
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep orange
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+  features:
+    - navigation.top
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    annotation: material/arrow-right-circle
+
+plugins:
+  - blog:
+      blog_dir: .
+      blog_toc: true
+      post_url_date_format: yyyy-MM-dd
+      post_url_format: "{date}-{file}"
+  - search
+  - tags:
+      tags_file: tags.md
+  - social
+
+markdown_extensions:
+  - abbr
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - admonition
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.mark
+  - footnotes
+  - pymdownx.keys
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - index.md
+  - tags.md
+  - randomnotes.md
