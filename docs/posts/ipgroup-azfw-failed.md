@@ -7,6 +7,8 @@ categories:
 tags:
   - azfw
   - ipgroup
+
+comments: true
 ---
 
 # Troubleshooting failed IP group that causes an AzureFirewall to fail

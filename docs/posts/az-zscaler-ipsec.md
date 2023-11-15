@@ -8,6 +8,8 @@ tags:
   - zscaler
   - vpn
   - linux
+
+comments: true
 ---
 
 # Zscaler Tunnels on Azure - Part 2 - Linux IPSec

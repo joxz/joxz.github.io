@@ -8,6 +8,8 @@ tags:
   - azure-policy
   - vm-extensions
   - qualys
+
+comments: true
 ---
 
 # Deploy Qualys Cloud Agent with Azure Policy

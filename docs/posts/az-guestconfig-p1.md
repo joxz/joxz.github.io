@@ -10,6 +10,8 @@ tags:
   - guestconfiguration
   - dsc
   - linux
+
+comments: true
 ---
 
 # Azure Policy Guest Configuration for Linux - Part 1

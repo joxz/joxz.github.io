@@ -7,6 +7,8 @@ categories:
 tags:
   - zscaler
   - vpn
+
+comments: true
 ---
 
 # Zscaler Tunnels on Azure - Part 1 - VPN Gateway
