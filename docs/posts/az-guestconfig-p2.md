@@ -20,8 +20,8 @@ Continuation of the [first part](az-guestconfig-p1.md/) of this series. The Gues
 Make sure you're signed in to Azure in the dev container `pwsh` session for this part:
 
 ```pwsh
-PS > connect-azaccount -devicecode
-PS > set-azcontext -subscription {subscriptionname}
+➜ Connect-AzAccount -DeviceCode
+➜ Set-AzContext -subscription {subscriptionname}
 ```
 
 ## Test and Verify Package
@@ -29,7 +29,7 @@ PS > set-azcontext -subscription {subscriptionname}
 Package can be tested with:
 
 ```pwsh
-PS > Get-GuestConfigurationPackageComplianceStatus -path './output/GCPackages/GCFilePresent_0.0.1.zip'
+➜ Get-GuestConfigurationPackageComplianceStatus -path './output/GCPackages/GCFilePresent_0.0.1.zip'
                                                                                                                         
 additionalProperties : {}
 assignmentName       : GCFilePresent
@@ -46,7 +46,7 @@ startTime            : 7/3/2023 8:24:32 PM
 Test remediation:
 
 ```pwsh
-PS > Start-GuestConfigurationPackageRemediation -path './output/GCPackages/GCFilePresent_0.0.1.zip'
+➜ Start-GuestConfigurationPackageRemediation -path './output/GCPackages/GCFilePresent_0.0.1.zip'
                                                                                                                         
 additionalProperties : {}
 assignmentName       : GCFilePresent
@@ -61,7 +61,7 @@ startTime            : 7/3/2023 8:25:26 PM
 `complianceStatus` is reported back as `True` and can be double checked with the same `Get-GuestConfigurationPackageComplianceStatus` as above. Also, check for the file in `/tmp`:
 
 ```pwsh
-PS > cat /tmp/00dummy.txt
+➜ cat /tmp/00dummy.txt
 TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
 ```
 
@@ -78,7 +78,7 @@ https://{storageaccountname}.blob.core.windows.net/{containername}/{filename}?{s
 Real URL:
 https://gcpolpackages46282.blob.core.windows.net/guestconfiguration/GCFilePresent_0.0.1.zip?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-07-22T14:31:11Z&st=2023-07-03T06:31:11Z&spr=https&sig=QwD2COOrgdsjbkteKau00%2B5duy4sbkT5JSykQp21ke8%3D
 
-PS > $contenturi
+➜ $contenturi
 https://gcpolpackages46282.blob.core.windows.net/guestconfiguration/GCFilePresent_0.0.1.zip?sv=2022-11-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-07-22T14:31:11Z&st=2023-07-03T06:31:11Z&spr=https&sig=QwD2COOrgdsjbkteKau00%2B5duy4sbkT5JSykQp21ke8%3D
 ```
 !!! warning
@@ -91,9 +91,9 @@ Please make sure the `$contentUri` variable is set correctly
 Detailed explanations for this step are available [:octicons-link-external-16: here](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#create-an-azure-policy-definition)
 
 ```pwsh
-PS > $policyid = $(new-guid)
+➜ $policyid = $(new-guid)
 
-PS > $PolicyConfig      = @{
+➜ $PolicyConfig      = @{
     PolicyId      = $policyid
     ContentUri    = $contenturi
     DisplayName   = 'GCFilePresent'
@@ -104,7 +104,7 @@ PS > $PolicyConfig      = @{
     Mode          = 'ApplyAndAutoCorrect'
   }
 
-PS > New-GuestConfigurationPolicy @PolicyConfig
+➜ New-GuestConfigurationPolicy @PolicyConfig
 
 Name          Path                                                                                                                PolicyId
 ----          ----                                                                                                                --------
@@ -122,7 +122,7 @@ This will create a policy definition in `policies/GCFilePresent_DeployIfNotExist
 ## Register Policy Definition
 
 ```pwsh
-PS > New-AzPolicyDefinition -Name 'GC Ensures file is present' -Policy '.\policies\GCFilePresent_DeployIfNotExists.json'
+➜ New-AzPolicyDefinition -Name 'GC Ensures file is present' -Policy '.\policies\GCFilePresent_DeployIfNotExists.json'
 
 Name               : GC Ensures file is present
 ResourceId         : /subscriptions/{subscriptionid}/providers/Microsoft.Authorization/policyDefinitions/GC Ensures file is present
