@@ -1,0 +1,925 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway">
+      
+      
+      
+      
+      
+        <link rel="next" href="../2023-07-04-az-zscaler-ipsec/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.8">
+    
+    
+      
+        <title>Zscaler Tunnels on Azure - Part 1 - VPN Gateway - cloud and networking stuff</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4b4a2bd9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+  
+  
+  
+  
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Zscaler Tunnels on Azure - Part 1 - VPN Gateway - cloud and networking stuff" >
+      
+        <meta  property="og:description"  content="This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway" >
+      
+        <meta  property="og:image"  content="./assets/images/social/posts/az-zscaler-vpngw.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="None" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Zscaler Tunnels on Azure - Part 1 - VPN Gateway - cloud and networking stuff" >
+      
+        <meta  name="twitter:description"  content="This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway" >
+      
+        <meta  name="twitter:image"  content="./assets/images/social/posts/az-zscaler-vpngw.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#zscaler-tunnels-on-azure-part-1-vpn-gateway" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="cloud and networking stuff" class="md-header__button md-logo" aria-label="cloud and networking stuff" data-md-component="logo">
+      
+  <img src="../assets/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            cloud and networking stuff
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Zscaler Tunnels on Azure - Part 1 - VPN Gateway
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="cloud and networking stuff" class="md-nav__button md-logo" aria-label="cloud and networking stuff" data-md-component="logo">
+      
+  <img src="../assets/favicon.ico" alt="logo">
+
+    </a>
+    cloud and networking stuff
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tags
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../randomnotes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    random notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/how-to/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    how-to
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href=".." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                        <time datetime="2023-07-04 00:00:00" class="md-ellipsis">July 4, 2023</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../category/lab/">lab</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              7 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lab-files" class="md-nav__link">
+    Lab files
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tunnel-and-zscaler-config" class="md-nav__link">
+    Tunnel and Zscaler config
+  </a>
+  
+    <nav class="md-nav" aria-label="Tunnel and Zscaler config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpn-gateway" class="md-nav__link">
+    VPN Gateway
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zscaler" class="md-nav__link">
+    Zscaler
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#default-route-environment" class="md-nav__link">
+    Default Route Environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-default-route-environment" class="md-nav__link">
+    Non-Default Route Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Non-Default Route Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux-nva" class="md-nav__link">
+    Linux NVA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    Test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#costs" class="md-nav__link">
+    Costs
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <a href="../tags/#zscaler" class="md-tag">zscaler</a>
+    
+  
+    
+    
+    
+      <a href="../tags/#vpn" class="md-tag">vpn</a>
+    
+  
+</nav>
+
+
+
+<h1 id="zscaler-tunnels-on-azure-part-1-vpn-gateway">Zscaler Tunnels on Azure - Part 1 - VPN Gateway<a class="headerlink" href="#zscaler-tunnels-on-azure-part-1-vpn-gateway" title="Permanent link">&para;</a></h1>
+<p>This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway. The complete Lab setup including notes is available <a href="https://github.com/joxz/lab-az/tree/main/vpngw-zscaler"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> here</a> as bicep files with additional notes and outputs.</p>
+<p>The target setup should provide the options to forward traffic to the Zscaler tunnels in a default route and non-default route environment.</p>
+<!-- more -->
+
+<h2 id="lab-files">Lab files<a class="headerlink" href="#lab-files" title="Permanent link">&para;</a></h2>
+<p>Lab Notes <a href="https://github.com/joxz/lab-az/tree/main/vpngw-zscaler"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> here</a></p>
+<p>The lab can be deployed with the following command:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># dry run</span>
+az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>what-if<span class="w"> </span>--location<span class="w"> </span><span class="s1">&#39;westeurope&#39;</span><span class="w"> </span>--template-file<span class="w"> </span>main.bicep
+
+<span class="c1"># deploy</span>
+az<span class="w"> </span>deployment<span class="w"> </span>sub<span class="w"> </span>create<span class="w"> </span>--location<span class="w"> </span><span class="s1">&#39;westeurope&#39;</span><span class="w"> </span>--template-file<span class="w"> </span>main.bicep
+</code></pre></div>
+<p>Components that will be deployed:</p>
+<ul>
+<li>Resource Group</li>
+<li>2 Vnets (gateway and spoke)</li>
+<li>VPN Gateway with 2 local network gateways building tunnels to Zscaler locations Frankfurt and Amsterdam</li>
+<li>Bastion</li>
+<li>Test VMs in both subnets (Linux VM in gw subnet, Windows VM in spoke subnet)</li>
+<li>VMSS for DNAT with a load balancer in front</li>
+</ul>
+<h2 id="tunnel-and-zscaler-config">Tunnel and Zscaler config<a class="headerlink" href="#tunnel-and-zscaler-config" title="Permanent link">&para;</a></h2>
+<h3 id="vpn-gateway">VPN Gateway<a class="headerlink" href="#vpn-gateway" title="Permanent link">&para;</a></h3>
+<p>IKEv2 parameters used (for Phase 2 AES IPSec encryption an extra license is needed<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>):</p>
+<div class="highlight"><pre><span></span><code>  <span class="n">connectionMode</span><span class="p">:</span> <span class="s1">&#39;Default&#39;</span>
+  <span class="n">connectionProtocol</span><span class="p">:</span> <span class="s1">&#39;IKEv2&#39;</span>
+  <span class="n">connectionType</span><span class="p">:</span> <span class="s1">&#39;IPsec&#39;</span>
+  <span class="n">dpdTimeoutSeconds</span><span class="p">:</span> <span class="n">20</span>
+  <span class="n">ipsecPolicies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="n">dhGroup</span><span class="p">:</span> <span class="s1">&#39;DHGroup2&#39;</span>
+      <span class="n">ikeEncryption</span><span class="p">:</span> <span class="s1">&#39;AES256&#39;</span>
+      <span class="n">ikeIntegrity</span><span class="p">:</span> <span class="s1">&#39;SHA256&#39;</span>
+      <span class="n">ipsecEncryption</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span>
+      <span class="n">ipsecIntegrity</span><span class="p">:</span> <span class="s1">&#39;SHA256&#39;</span>
+      <span class="n">pfsGroup</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span>
+      <span class="n">saDataSizeKilobytes</span><span class="p">:</span> <span class="n">102400000</span>
+      <span class="n">saLifeTimeSeconds</span><span class="p">:</span> <span class="n">28800</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+</code></pre></div>
+<p>Full config: <a href="https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vpngw.bicep"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> vpngw.bicep</a></p>
+<h3 id="zscaler">Zscaler<a class="headerlink" href="#zscaler" title="Permanent link">&para;</a></h3>
+<p>The following needs to be created in the Zscaler portal:</p>
+<ul>
+<li>Static IPs (VPN gateway public IPs)</li>
+<li>VPN Credentials</li>
+<li>Location (static IPs and VPN credentials need to be referenced here)</li>
+</ul>
+<p><img alt="loc" src="../assets/zsc-vpngw/zscaler-location.png" /></p>
+<h2 id="default-route-environment">Default Route Environment<a class="headerlink" href="#default-route-environment" title="Permanent link">&para;</a></h2>
+<p>You cannot configure <code>0.0.0.0/0</code> on the local network gateway, but the default route range can be divided into two prefixes that work: <code>0.0.0.0/1</code>, <code>128.0.0.0/1</code>. This will also be preferred over the system route for <code>0.0.0.0/0</code> to the internet because it's more specific. All traffic will be forwarded to the VPN Gateway</p>
+<div class="highlight"><pre><span></span><code>az<span class="w"> </span>network<span class="w"> </span>nic<span class="w"> </span>show-effective-route-table<span class="w"> </span>-n<span class="w"> </span>nic-vm-sp<span class="w"> </span>-g<span class="w"> </span>rg-zsc-vpngw<span class="w"> </span>-o<span class="w"> </span>table
+
+Source<span class="w">                 </span>State<span class="w">    </span>Address<span class="w"> </span>Prefix<span class="w">    </span>Next<span class="w"> </span>Hop<span class="w"> </span>Type<span class="w">          </span>Next<span class="w"> </span>Hop<span class="w"> </span>IP
+---------------------<span class="w">  </span>-------<span class="w">  </span>----------------<span class="w">  </span>---------------------<span class="w">  </span>-------------
+Default<span class="w">                </span>Active<span class="w">   </span><span class="m">10</span>.8.0.0/16<span class="w">       </span>VnetLocal
+Default<span class="w">                </span>Active<span class="w">   </span><span class="m">10</span>.1.0.0/16<span class="w">       </span>VNetPeering
+VirtualNetworkGateway<span class="w">  </span>Active<span class="w">   </span><span class="m">0</span>.0.0.0/1<span class="w">         </span>VirtualNetworkGateway<span class="w">  </span><span class="m">10</span>.1.0.6
+VirtualNetworkGateway<span class="w">  </span>Active<span class="w">   </span><span class="m">0</span>.0.0.0/1<span class="w">         </span>VirtualNetworkGateway<span class="w">  </span><span class="m">10</span>.1.0.7
+VirtualNetworkGateway<span class="w">  </span>Active<span class="w">   </span><span class="m">128</span>.0.0.0/1<span class="w">       </span>VirtualNetworkGateway<span class="w">  </span><span class="m">10</span>.1.0.6
+VirtualNetworkGateway<span class="w">  </span>Active<span class="w">   </span><span class="m">128</span>.0.0.0/1<span class="w">       </span>VirtualNetworkGateway<span class="w">  </span><span class="m">10</span>.1.0.7
+Default<span class="w">                </span>Active<span class="w">   </span><span class="m">0</span>.0.0.0/0<span class="w">         </span>Internet
+</code></pre></div>
+<p>For peered Vnets, the option <code>Use the remote virtual network's gateway or Route Server</code> needs to be active for the VPN routes to be advertised</p>
+<h2 id="non-default-route-environment">Non-Default Route Environment<a class="headerlink" href="#non-default-route-environment" title="Permanent link">&para;</a></h2>
+<p>In this setup, the <a href="https://help.zscaler.com/zia/about-global-zscaler-enforcement-nodes"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Zscaler Global Public Service Edge</a> IPs will be announced on the local network gateway. Those are anycast IPs advertised in every Zscaler datacenter. </p>
+<p>Also, some form of DNAT is needed - either with a NVA firewall appliance (e.g. Fortigate) or a Linux NVA with iptables DNAT. The client IP will not be preserved with DNAT and only NVA IPs be visible in the Zscaler logs.</p>
+<h3 id="linux-nva">Linux NVA<a class="headerlink" href="#linux-nva" title="Permanent link">&para;</a></h3>
+<p>DNAT/SNAT on Linux can easily be enabled with <code>iptables</code>. Packets reaching the NVA on a specific port (e.g. <code>10101</code> for a Zscaler Dedicated Proxy Port <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> or ports <code>80</code>, <code>443</code> )</p>
+<h4 id="working-linux-settings">Working Linux settings<a class="headerlink" href="#working-linux-settings" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This configuration will not survive a reboot</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>/proc/sys/net/ipv4/ip_forward
+iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>--dport<span class="w"> </span><span class="m">10101</span><span class="w"> </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">185</span>.46.212.88:10101
+iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-d<span class="w"> </span><span class="m">185</span>.46.212.88<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The first <code>iptables</code> rule changes the destination IP, the second rule changes the source IP to the VM NIC</p>
+</div>
+<p>There is a lot more room to make the config more versatile, e.g. announce one Zscaler anycast IP per tunnel and use different ingress ports on the NVA. This way, traffic could be steered to the preferred tunnel via PAC file:</p>
+<pre class="mermaid"><code>graph LR
+    A["PAC file: "PROXY 10.1.1.4:10101""] --&gt; B[NVA port 10101];
+    B ---|NVA routing decision| C[forward to 185.46.212.88:10101];
+    C --&gt; D[tunnel to FRA4];</code></pre>
+<pre class="mermaid"><code>graph LR
+    A["PAC file: "PROXY 10.1.1.4:8080""] --&gt; B[NVA port 8080];
+    B ---|NVA routing decision| C[forward to 185.46.212.89:8080];
+    C --&gt; D[tunnel to AMS2];</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A PAC file also supports multiple proxy assignments, e.g. <code class="highlight"><span class="k">return</span><span class="w"> </span><span class="s2">&quot;PROXY 10.1.1.4:10101; PROXY 10.1.1.4:10102; DIRECT&quot;</span></code>, so resiliency is not a problem.</p>
+<p>In this example, if the first proxy node is not reachable, it will fall back to the second one; if that's not reachable, traffic will go direct</p>
+</div>
+<p>If SNAT port exhaustion is an issue, the <code>net.ipv4.ip_local_port_range</code> setting (see: <a href="https://github.com/joxz/lab-az/tree/main/vpngw-zscaler#snat-ports"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> here</a>) should be adjusted, or multiple ip addresses can be assigned to a NIC in Azure <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup></p>
+<h4 id="nva-provisioning">NVA Provisioning<a class="headerlink" href="#nva-provisioning" title="Permanent link">&para;</a></h4>
+<p>The Linux NVAs don't need much config, they are basically just a NAT gateway. However, to make the configuration easy and persistent across reboots, the VM can be provisioned with the correct settings with <code>cloud-init</code><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<p><code>cloud-init</code> scripts can be added to Azure VMs during creation with the --custom-data switch (e.g. Lab repo <a href="https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L105"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> vmss.bicep</a>)</p>
+<p>Sample <code>cloud-config.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#cloud-config</span>
+<span class="nt">package_upgrade</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">runcmd</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo 1 &gt; /proc/sys/net/ipv6/conf/all/forwarding</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 10101 -j DNAT --to-destination 185.46.212.88:10101 -m comment --comment &quot;forward port 10101 traffic to zscaler&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iptables -t nat -A POSTROUTING -d 185.46.212.88 -j MASQUERADE -m comment --comment &quot;snat traffic to zscaler&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apt install iptables-persistent -y</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wget -O /tmp/netdata-kickstart.sh https://my-netdata.io/kickstart.sh &amp;&amp; sh /tmp/netdata-kickstart.sh --non-interactive</span>
+<span class="nt">write_file</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/sysctl.conf</span>
+<span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">net.ipv4.ip_forward=1</span>
+<span class="w">      </span><span class="no">net.ipv6.conf.all.forwarding=1</span>
+<span class="w">      </span><span class="no">net.ipv4.conf.all.accept_redirects = 0</span>
+<span class="w">      </span><span class="no">net.ipv4.conf.all.send_redirects = 0</span>
+<span class="w">    </span><span class="nt">append</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>The config file will enable IP forwarding, set the <code>iptables</code>rules and make those persistent across reboots. Also, <a href="https://github.com/netdata/netdata"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Netdata</a> will be installed for monitoring and is available at: <code>http://&lt;VMIP&gt;:19999</code></p>
+<p>IP forwarding also needs to be enabled on the network interface resource in Azure:</p>
+<p><img alt="ipfwd" src="../assets/zsc-vpngw/ipfwd.png" /></p>
+<h4 id="nva-as-vmss">NVA as VMSS<a class="headerlink" href="#nva-as-vmss" title="Permanent link">&para;</a></h4>
+<p>The Linux NVA can also be deployed as a VMSS, with that we can achieve scalability (manual or autoscaling) and resiliency by placing instances in different AZs (see: <a href="https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L84"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> vmss.bicep#zones</a>). For load balancing the VMSS, Azure Load Balancer will be used (see: <a href="https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L8"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> vmss.bicep#ilb resource</a>)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently <code>cloud-init</code> settings can not be updated on a deployed VMSS with CLI or Powershell <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>, so updating VMSS instances with new settings is probably best done with an OS image gallery and updating the image.</p>
+</div>
+<h3 id="test">Test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On spoke VM add the NVA IP as a proxy server:</li>
+</ul>
+<p><img alt="pac" src="../assets/zsc-vpngw/pac.png" /></p>
+<ul>
+<li>Check connectivity at <code>http://ip.zscaler.com</code>:</li>
+</ul>
+<p><img alt="ipzscaler" src="../assets/zsc-vpngw/ip-zscaler-com.png" /></p>
+<p>A packet capture on the NVA confirms the NAT is working:</p>
+<div class="highlight"><pre><span></span><code>jo@vm-gwsn:~$<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span><span class="s1">&#39;port 10101&#39;</span><span class="w"> </span>
+
+<span class="m">17</span>:53:16.490228<span class="w"> </span>IP<span class="w"> </span><span class="m">185</span>.46.212.88.10101<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.1.1.4.57323:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">193959</span>:193998,<span class="w"> </span>ack<span class="w"> </span><span class="m">2964</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2113</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">39</span>
+<span class="m">17</span>:53:16.490241<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.10101<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.8.0.4.57323:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">193928</span>:193959,<span class="w"> </span>ack<span class="w"> </span><span class="m">2964</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2113</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">31</span>
+<span class="m">17</span>:53:16.490244<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.10101<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.8.0.4.57323:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">193959</span>:193998,<span class="w"> </span>ack<span class="w"> </span><span class="m">2964</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2113</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">39</span>
+<span class="m">17</span>:53:16.490723<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.8.0.4.57323<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.1.1.4.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">2964</span>:2999,<span class="w"> </span>ack<span class="w"> </span><span class="m">193928</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">35</span>
+<span class="m">17</span>:53:16.490723<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.8.0.4.57323<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.1.1.4.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>.<span class="o">]</span>,<span class="w"> </span>ack<span class="w"> </span><span class="m">193998</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">0</span>
+<span class="m">17</span>:53:16.490739<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.57323<span class="w"> </span>&gt;<span class="w"> </span><span class="m">185</span>.46.212.88.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">2964</span>:2999,<span class="w"> </span>ack<span class="w"> </span><span class="m">193928</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">35</span>
+<span class="m">17</span>:53:16.490743<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.57323<span class="w"> </span>&gt;<span class="w"> </span><span class="m">185</span>.46.212.88.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>.<span class="o">]</span>,<span class="w"> </span>ack<span class="w"> </span><span class="m">193998</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">0</span>
+<span class="m">17</span>:53:16.490850<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.8.0.4.57323<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.1.1.4.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">2999</span>:3038,<span class="w"> </span>ack<span class="w"> </span><span class="m">193998</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">39</span>
+<span class="m">17</span>:53:16.490853<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.57323<span class="w"> </span>&gt;<span class="w"> </span><span class="m">185</span>.46.212.88.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">2999</span>:3038,<span class="w"> </span>ack<span class="w"> </span><span class="m">193998</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">39</span>
+<span class="m">17</span>:53:16.495014<span class="w"> </span>IP<span class="w"> </span><span class="m">185</span>.46.212.88.10101<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.1.1.4.57323:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>.<span class="o">]</span>,<span class="w"> </span>ack<span class="w"> </span><span class="m">3038</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2111</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">0</span>
+<span class="m">17</span>:53:16.495027<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.10101<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.8.0.4.57323:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>.<span class="o">]</span>,<span class="w"> </span>ack<span class="w"> </span><span class="m">3038</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2111</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">0</span>
+<span class="m">17</span>:53:16.543674<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.8.0.4.57327<span class="w"> </span>&gt;<span class="w"> </span><span class="m">10</span>.1.1.4.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">3424</span>:3463,<span class="w"> </span>ack<span class="w"> </span><span class="m">13642</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">39</span>
+<span class="m">17</span>:53:16.543702<span class="w"> </span>IP<span class="w"> </span><span class="m">10</span>.1.1.4.57327<span class="w"> </span>&gt;<span class="w"> </span><span class="m">185</span>.46.212.88.10101:<span class="w"> </span>Flags<span class="w"> </span><span class="o">[</span>P.<span class="o">]</span>,<span class="w"> </span>seq<span class="w"> </span><span class="m">3424</span>:3463,<span class="w"> </span>ack<span class="w"> </span><span class="m">13642</span>,<span class="w"> </span>win<span class="w"> </span><span class="m">2050</span>,<span class="w"> </span>length<span class="w"> </span><span class="m">39</span>
+</code></pre></div>
+<h2 id="costs">Costs<a class="headerlink" href="#costs" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Example Costs</p>
+<p>VPN Gateway: SKU <code>VpnGw2AZ</code> ~$400/month + traffic</p>
+<p>VMSS: 2x <code>Standard_D2sv3</code> ~245/month (other VM instance sizes should be tested)</p>
+<p>LB: SKU <code>Standard</code> ~20/month</p>
+</div>
+<hr />
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://help.zscaler.com/zia/understanding-ipsec-vpns#ikev2-supported-parameters"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Understanding IPSec VPNs</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://help.zscaler.com/zia/configuring-dedicated-proxy-ports"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Configuring Dedicated Proxy Ports</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://learn.microsoft.com/en-us/azure/virtual-machines/linux/using-cloud-init"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> cloud-init support for virtual machines in Azure</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-network-multiple-ip-addresses-portal"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Assign multiple IP addresses to virtual machines using the Azure portal</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://github.com/joxz/lab-az/tree/main/vpngw-zscaler#linux-nva-as-vmss"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Lab Notes - Linux NVA as VMSS</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
+      
+    
+  </body>
+</html>

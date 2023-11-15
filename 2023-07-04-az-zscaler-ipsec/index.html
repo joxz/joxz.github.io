@@ -1,0 +1,1077 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Building Zscaler VPN tunnels in Azure with Linux IPSec">
+      
+      
+      
+      
+        <link rel="prev" href="../2023-07-04-az-zscaler-vpngw/">
+      
+      
+        <link rel="next" href="../2023-07-04-az-guestconfig-p1/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.8">
+    
+    
+      
+        <title>Zscaler Tunnels on Azure - Part 2 - Linux IPSec - cloud and networking stuff</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4b4a2bd9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+  
+  
+  
+  
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="Zscaler Tunnels on Azure - Part 2 - Linux IPSec - cloud and networking stuff" >
+      
+        <meta  property="og:description"  content="Building Zscaler VPN tunnels in Azure with Linux IPSec" >
+      
+        <meta  property="og:image"  content="./assets/images/social/posts/az-zscaler-ipsec.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="None" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="Zscaler Tunnels on Azure - Part 2 - Linux IPSec - cloud and networking stuff" >
+      
+        <meta  name="twitter:description"  content="Building Zscaler VPN tunnels in Azure with Linux IPSec" >
+      
+        <meta  name="twitter:image"  content="./assets/images/social/posts/az-zscaler-ipsec.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#zscaler-tunnels-on-azure-part-2-linux-ipsec" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="cloud and networking stuff" class="md-header__button md-logo" aria-label="cloud and networking stuff" data-md-component="logo">
+      
+  <img src="../assets/favicon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            cloud and networking stuff
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Zscaler Tunnels on Azure - Part 2 - Linux IPSec
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="cloud and networking stuff" class="md-nav__button md-logo" aria-label="cloud and networking stuff" data-md-component="logo">
+      
+  <img src="../assets/favicon.ico" alt="logo">
+
+    </a>
+    cloud and networking stuff
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tags
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../randomnotes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    random notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Archive
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../archive/2023/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2023
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Categories
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Categories
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/how-to/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    how-to
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../category/lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    lab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href=".." class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5v-5Z"/></svg>
+                        <time datetime="2023-07-04 00:00:00" class="md-ellipsis">July 4, 2023</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3H9m3 2 4 13 3-1-4-13-3 1M5 5v13h3V5H5M3 19v2h18v-2H3Z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../category/lab/">lab</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              8 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+            
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#target-setup" class="md-nav__link">
+    Target Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ipsec-on-linux" class="md-nav__link">
+    IPSec on Linux
+  </a>
+  
+    <nav class="md-nav" aria-label="IPSec on Linux">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux-sysctl-settings" class="md-nav__link">
+    Linux sysctl Settings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-psk" class="md-nav__link">
+    Set PSK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tunnel-basics" class="md-nav__link">
+    Tunnel Basics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#route-based-vpn" class="md-nav__link">
+    Route-based VPN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#policy-based-vpn" class="md-nav__link">
+    Policy-based VPN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-the-tunnel" class="md-nav__link">
+    Enable the Tunnel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#troubleshooting-ipsec-tunnels" class="md-nav__link">
+    Troubleshooting IPSec Tunnels
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dnatsnat" class="md-nav__link">
+    DNAT/SNAT
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ha" class="md-nav__link">
+    HA
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#netdata-libreswan-monitoring" class="md-nav__link">
+    Netdata Libreswan Monitoring
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#costs" class="md-nav__link">
+    Costs
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+  
+  
+
+<nav class="md-tags" >
+  
+    
+    
+    
+      <a href="../tags/#zscaler" class="md-tag">zscaler</a>
+    
+  
+    
+    
+    
+      <a href="../tags/#vpn" class="md-tag">vpn</a>
+    
+  
+    
+    
+    
+      <a href="../tags/#linux" class="md-tag">linux</a>
+    
+  
+</nav>
+
+
+
+<h1 id="zscaler-tunnels-on-azure-part-2-linux-ipsec">Zscaler Tunnels on Azure - Part 2 - Linux IPSec<a class="headerlink" href="#zscaler-tunnels-on-azure-part-2-linux-ipsec" title="Permanent link">&para;</a></h1>
+<p>In my <a href="../2023-07-04-az-zscaler-vpngw/">last post</a>, I created a IPSec tunnel to Zscaler using Azure VPN Gateway. Unfortunately, this setup does not work in a Virtual WAN environment, because <a href="https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-a-spoke-vnet-have-a-virtual-network-gateway"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> spoke Vnets can't have Vnet gateways</a>. Using VWAN VPN Gateways would make the VPN tunnel a branch, which is not what we need (I also want to avoid routing Public IPs internally).</p>
+<p>Another option would be to use the Linux server to do the DNAT and IPSec tunnel, so this is what we will explore here.</p>
+<!-- more -->
+
+<h2 id="target-setup">Target Setup<a class="headerlink" href="#target-setup" title="Permanent link">&para;</a></h2>
+<p><img alt="ipsec" src="../assets/zsc-ipsec/ipsec-setup.png" /></p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Necessary Azure resources: RG, Vnet, Subnet,...</li>
+<li>Linux server with a public IP</li>
+<li>For multiple servers, each server needs it's own public IP attached, Public Azure load balancer does not work</li>
+<li>Zscaler VPN prerequisites (Static IP, VPN Credentials (PSK), Location)</li>
+<li>NSG to open UDP ports <code>500</code>, <code>4500</code> from the internet</li>
+<li>IP Forwarding enabled for the VM NIC resource</li>
+</ul>
+<p>Note: Port <code>10101</code> is a Zscaler Dedicated Proxy Port (DPP)<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>, but also all other available Zscaler ports<sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> (e.g. 80, 443, 9400, 9480 and 9443) can be used</p>
+<h2 id="ipsec-on-linux">IPSec on Linux<a class="headerlink" href="#ipsec-on-linux" title="Permanent link">&para;</a></h2>
+<p>There are multiple options for building IPSec tunnels in Linux: e.g. <a href="https://libreswan.org/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Libreswan</a>, <a href="https://www.strongswan.org/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Strongswan</a>, <a href="https://openswan.org/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Openswan</a></p>
+<p>For no particular reason, we will build the site-to-site tunnel with Libreswan<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> in this example.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libreswan<span class="w"> </span>-y
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ipsec<span class="w"> </span>verify
+
+Verifying<span class="w"> </span>installed<span class="w"> </span>system<span class="w"> </span>and<span class="w"> </span>configuration<span class="w"> </span>files
+
+Version<span class="w"> </span>check<span class="w"> </span>and<span class="w"> </span>ipsec<span class="w"> </span>on-path<span class="w">                     </span><span class="o">[</span>OK<span class="o">]</span>
+Libreswan<span class="w"> </span><span class="m">3</span>.32<span class="w"> </span><span class="o">(</span>netkey<span class="o">)</span><span class="w"> </span>on<span class="w"> </span><span class="m">5</span>.15.0-1034-azure
+Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>IPsec<span class="w"> </span>support<span class="w"> </span><span class="k">in</span><span class="w"> </span>kernel<span class="w">                </span><span class="o">[</span>OK<span class="o">]</span>
+<span class="w"> </span>NETKEY:<span class="w"> </span>Testing<span class="w"> </span>XFRM<span class="w"> </span>related<span class="w"> </span>proc<span class="w"> </span>values
+<span class="w">         </span>ICMP<span class="w"> </span>default/send_redirects<span class="w">                </span><span class="o">[</span>OK<span class="o">]</span>
+<span class="w">         </span>ICMP<span class="w"> </span>default/accept_redirects<span class="w">              </span><span class="o">[</span>OK<span class="o">]</span>
+<span class="w">         </span>XFRM<span class="w"> </span>larval<span class="w"> </span>drop<span class="w">                           </span><span class="o">[</span>OK<span class="o">]</span>
+Pluto<span class="w"> </span>ipsec.conf<span class="w"> </span>syntax<span class="w">                             </span><span class="o">[</span>OK<span class="o">]</span>
+Checking<span class="w"> </span>rp_filter<span class="w">                                  </span><span class="o">[</span>OK<span class="o">]</span>
+Checking<span class="w"> </span>that<span class="w"> </span>pluto<span class="w"> </span>is<span class="w"> </span>running<span class="w">                      </span><span class="o">[</span>OK<span class="o">]</span>
+<span class="w"> </span>Pluto<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE<span class="w"> </span>on<span class="w"> </span>udp<span class="w"> </span><span class="m">500</span><span class="w">                 </span><span class="o">[</span>OK<span class="o">]</span>
+<span class="w"> </span>Pluto<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE/NAT-T<span class="w"> </span>on<span class="w"> </span>udp<span class="w"> </span><span class="m">4500</span><span class="w">          </span><span class="o">[</span>OK<span class="o">]</span>
+<span class="w"> </span>Pluto<span class="w"> </span>ipsec.secret<span class="w"> </span>syntax<span class="w">                          </span><span class="o">[</span>OK<span class="o">]</span>
+Checking<span class="w"> </span><span class="s1">&#39;ip&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w">                               </span><span class="o">[</span>OK<span class="o">]</span>
+Checking<span class="w"> </span><span class="s1">&#39;iptables&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w">                         </span><span class="o">[</span>OK<span class="o">]</span>
+Checking<span class="w"> </span><span class="s1">&#39;prelink&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>interfere<span class="w"> </span>with<span class="w"> </span>FIPS<span class="w"> </span><span class="o">[</span>OK<span class="o">]</span>
+Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>obsolete<span class="w"> </span>ipsec.conf<span class="w"> </span>options<span class="w">            </span><span class="o">[</span>OK<span class="o">]</span>
+</code></pre></div>
+<h3 id="linux-sysctl-settings">Linux sysctl Settings<a class="headerlink" href="#linux-sysctl-settings" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/sysctl.d/99-dnat.conf</span>
+net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
+net.ipv6.conf.all.forwarding<span class="o">=</span><span class="m">1</span>
+net.ipv4.conf.*.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+net.ipv4.conf.*.send_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+net.ipv6.conf.all.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+net.ipv6.conf.default.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+net.ipv4.ip_local_port_range<span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="m">65535</span>
+</code></pre></div>
+<p><code>net.ipv4.ip_local_port_range=2048 65535</code> extends the standard SNAT port range (~28000 ports on Ubuntu 22.04) to prevent SNAT port exhaustion<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<h3 id="set-psk">Set PSK<a class="headerlink" href="#set-psk" title="Permanent link">&para;</a></h3>
+<p>After that, set the PSK to be used for the tunnel:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/ipsec.d/zscaler.secrets</span>
+<span class="c1"># to use only one PSK for all connections:</span>
+%any<span class="w"> </span>%any<span class="w"> </span>:<span class="w"> </span>PSK<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sCAkcUwe434DwK4c54qBLw9H8G</span><span class="s2">&quot;</span>
+
+<span class="c1"># to use the PSK for the connection to fra4-vpn.zscaler.net only:</span>
+fra4-vpn.zscaler.net<span class="w"> </span>:<span class="w"> </span>PSK<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sCAkcUwe434DwK4c54qBLw9H8G</span><span class="s2">&quot;</span>
+</code></pre></div>
+<h3 id="tunnel-basics">Tunnel Basics<a class="headerlink" href="#tunnel-basics" title="Permanent link">&para;</a></h3>
+<p><a href="https://libreswan.org/man/ipsec.conf.5.html"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Libreswan ipsec.conf settings</a></p>
+<p><a href="https://libreswan.org/wiki/Configuration_examples"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Libreswan configuration examples</a></p>
+<p><a href="https://help.zscaler.com/zia/understanding-ipsec-vpns#ikev2-supported-parameters"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Zscaler IPSec parameters</a></p>
+<p><a href="https://help.zscaler.com/zia/about-global-zscaler-enforcement-nodes"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Zscaler Global Public Service Edge</a></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code>leftid</code> needs to be set to the VM public IP (this one should also be added to Zscaler Static IPs<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>)</p>
+</div>
+<h3 id="route-based-vpn">Route-based VPN<a class="headerlink" href="#route-based-vpn" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Creates tunnel interface <code>vti0</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> A route-based VPN advertises <code>0.0.0.0/0</code> on both sides</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Disables <code>vti-routing</code> because we don't want to route <code>0.0.0.0/0</code> into the tunnel</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Marks the traffic - this mark could be used in <code>iptables</code> in <code>conntrack</code> rules</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Only traffic directly routed into the tunnel will be forwarded that way</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You need to manually add routes to route traffic into the tunnel: <code>ip route add 185.46.212.88 dev vti0</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Up/down script advantageous with <code>leftupdown</code> parameter to add/withdraw route according to <code>vti</code> state</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/ipsec.d/zscaler.conf</span>
+conn<span class="w"> </span>zscaler
+<span class="w">    </span><span class="nv">type</span><span class="o">=</span>tunnel
+<span class="w">    </span><span class="nv">authby</span><span class="o">=</span>secret
+<span class="w">    </span><span class="nv">auto</span><span class="o">=</span>start
+<span class="w">    </span><span class="nv">left</span><span class="o">=</span>%defaultroute
+<span class="w">    </span><span class="nv">leftid</span><span class="o">=</span><span class="m">45</span>.123.234.123
+<span class="hll"><span class="w">    </span><span class="nv">leftsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
+</span><span class="w">    </span><span class="nv">right</span><span class="o">=</span>fra4-vpn.zscaler.net
+<span class="hll"><span class="w">    </span><span class="nv">rightsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
+</span><span class="w">    </span><span class="nv">mark</span><span class="o">=</span><span class="m">5</span>/0xffffffff
+<span class="hll"><span class="w">    </span>vti-interface<span class="o">=</span>vti0
+</span><span class="hll"><span class="w">    </span>vti-routing<span class="o">=</span>no
+</span><span class="w">    </span><span class="nv">ikev2</span><span class="o">=</span>yes
+<span class="w">    </span><span class="nv">ike</span><span class="o">=</span>aes256-sha2_256<span class="p">;</span>dh14
+<span class="w">    </span><span class="nv">ikelifetime</span><span class="o">=</span>86400s
+<span class="w">    </span><span class="nv">dpdaction</span><span class="o">=</span>restart
+<span class="w">    </span><span class="nv">dpdtimeout</span><span class="o">=</span>20s
+<span class="w">    </span><span class="nv">dpddelay</span><span class="o">=</span>25s
+<span class="w">    </span>nat-keepalive<span class="o">=</span>yes
+<span class="w">    </span><span class="nv">phase2</span><span class="o">=</span>esp
+<span class="w">    </span><span class="nv">esp</span><span class="o">=</span>null-md5
+<span class="w">    </span><span class="nv">salifetime</span><span class="o">=</span>28800s
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In general, route-based vpn tunnels should be preferred to policy-based vpn tunnels. </p>
+<p>For example, route-based tunnels allow you to run routing protocols over the VPN connection. A very good article about the different types <a href="https://weberblog.net/route-vs-policy-based-vpn-tunnels/">here</a></p>
+</div>
+<h3 id="policy-based-vpn">Policy-based VPN<a class="headerlink" href="#policy-based-vpn" title="Permanent link">&para;</a></h3>
+<p>With policy-based VPNs, an IPSec policy is created to route destination <code>185.46.212.88</code> into the tunnel:</p>
+<p>No <code>vti</code> is created, no adding/removing routes in the routing table</p>
+<p>Configuration:</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># /etc/ipsec.d/zscaler.conf</span>
+conn<span class="w"> </span>zscaler
+<span class="w">    </span><span class="nv">type</span><span class="o">=</span>tunnel
+<span class="w">    </span><span class="nv">authby</span><span class="o">=</span>secret
+<span class="w">    </span><span class="nv">auto</span><span class="o">=</span>start
+<span class="w">    </span><span class="nv">left</span><span class="o">=</span>%defaultroute
+<span class="w">    </span><span class="nv">leftid</span><span class="o">=</span><span class="m">45</span>.123.234.123
+<span class="hll"><span class="w">    </span><span class="nv">leftsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
+</span><span class="w">    </span><span class="nv">right</span><span class="o">=</span>fra4-vpn.zscaler.net
+<span class="hll"><span class="w">    </span><span class="nv">rightsubnet</span><span class="o">=</span><span class="m">185</span>.46.212.88/32
+</span><span class="w">    </span><span class="nv">mark</span><span class="o">=</span><span class="m">5</span>/0xffffffff
+<span class="w">    </span><span class="nv">ikev2</span><span class="o">=</span>yes
+<span class="w">    </span><span class="nv">ike</span><span class="o">=</span>aes256-sha2_256<span class="p">;</span>dh14
+<span class="w">    </span><span class="nv">ikelifetime</span><span class="o">=</span>86400s
+<span class="w">    </span><span class="nv">dpdaction</span><span class="o">=</span>restart
+<span class="w">    </span><span class="nv">dpdtimeout</span><span class="o">=</span>20s
+<span class="w">    </span><span class="nv">dpddelay</span><span class="o">=</span>25s
+<span class="w">    </span>nat-keepalive<span class="o">=</span>yes
+<span class="w">    </span><span class="nv">phase2</span><span class="o">=</span>esp
+<span class="w">    </span><span class="nv">esp</span><span class="o">=</span>null-md5
+<span class="w">    </span><span class="nv">salifetime</span><span class="o">=</span>28800s
+</code></pre></div>
+Check IPSec policy and state:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># state</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>xfrm<span class="w"> </span>state
+
+src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
+<span class="w">    </span>proto<span class="w"> </span>esp<span class="w"> </span>spi<span class="w"> </span>0x3711f91f<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+<span class="w">    </span>replay-window<span class="w"> </span><span class="m">32</span><span class="w"> </span>flag<span class="w"> </span>af-unspec
+<span class="w">    </span>auth-trunc<span class="w"> </span>hmac<span class="o">(</span>md5<span class="o">)</span><span class="w"> </span>0x3b2c9faf94007bc1efc94ca796b37d37<span class="w"> </span><span class="m">96</span>
+<span class="w">    </span>enc<span class="w"> </span>ecb<span class="o">(</span>cipher_null<span class="o">)</span>
+<span class="w">    </span>encap<span class="w"> </span><span class="nb">type</span><span class="w"> </span>espinudp<span class="w"> </span>sport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>dport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>addr<span class="w"> </span><span class="m">0</span>.0.0.0
+<span class="w">    </span>anti-replay<span class="w"> </span>context:<span class="w"> </span>seq<span class="w"> </span>0x3,<span class="w"> </span>oseq<span class="w"> </span>0x0,<span class="w"> </span>bitmap<span class="w"> </span>0x00000007
+src<span class="w"> </span><span class="m">10</span>.4.1.4<span class="w"> </span>dst<span class="w"> </span><span class="m">165</span>.225.112.12
+<span class="w">    </span>proto<span class="w"> </span>esp<span class="w"> </span>spi<span class="w"> </span>0x5f1e1fd1<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+<span class="w">    </span>replay-window<span class="w"> </span><span class="m">32</span><span class="w"> </span>flag<span class="w"> </span>af-unspec
+<span class="w">    </span>auth-trunc<span class="w"> </span>hmac<span class="o">(</span>md5<span class="o">)</span><span class="w"> </span>0x18bd5dd32c12a72a4c2f5288ab287fe0<span class="w"> </span><span class="m">96</span>
+<span class="w">    </span>enc<span class="w"> </span>ecb<span class="o">(</span>cipher_null<span class="o">)</span>
+<span class="w">    </span>encap<span class="w"> </span><span class="nb">type</span><span class="w"> </span>espinudp<span class="w"> </span>sport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>dport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>addr<span class="w"> </span><span class="m">0</span>.0.0.0
+<span class="w">    </span>anti-replay<span class="w"> </span>context:<span class="w"> </span>seq<span class="w"> </span>0x0,<span class="w"> </span>oseq<span class="w"> </span>0x3,<span class="w"> </span>bitmap<span class="w"> </span>0x00000000
+
+<span class="c1"># policy</span>
+sudo<span class="w"> </span>ip<span class="w"> </span>xfrm<span class="w"> </span>pol
+
+src<span class="w"> </span><span class="m">0</span>.0.0.0/0<span class="w"> </span>dst<span class="w"> </span><span class="m">185</span>.46.212.88/32
+<span class="w">    </span>dir<span class="w"> </span>out<span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
+<span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">10</span>.4.1.4<span class="w"> </span>dst<span class="w"> </span><span class="m">165</span>.225.112.12
+<span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+src<span class="w"> </span><span class="m">185</span>.46.212.88/32<span class="w"> </span>dst<span class="w"> </span><span class="m">0</span>.0.0.0/0
+<span class="w">    </span>dir<span class="w"> </span>fwd<span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
+<span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
+<span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+src<span class="w"> </span><span class="m">185</span>.46.212.88/32<span class="w"> </span>dst<span class="w"> </span><span class="m">0</span>.0.0.0/0
+<span class="w">    </span>dir<span class="w"> </span><span class="k">in</span><span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
+<span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
+<span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+&lt;...&gt;
+</code></pre></div>
+<h3 id="enable-the-tunnel">Enable the Tunnel<a class="headerlink" href="#enable-the-tunnel" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># enable and start service</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ipsec.service
+
+sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>ipsec.service
+
+<span class="c1"># tail -f service logs</span>
+journalctl<span class="w"> </span>-u<span class="w"> </span>ipsec<span class="w"> </span>-f
+
+<span class="c1"># successful conneciton</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE<span class="w"> </span>messages
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>Kernel<span class="w"> </span>supports<span class="w"> </span>NIC<span class="w"> </span>esp-hw-offload
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>eth0/eth0<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="m">10</span>.
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>eth0/eth0<span class="w"> </span><span class="m">10</span>.4.1.4:4500
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="m">127</span>.0.
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="m">127</span>.0.0.1:4500
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>loading<span class="w"> </span>secrets<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;/etc/ipsec.secrets&quot;</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>loading<span class="w"> </span>secrets<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;/etc/ipsec.d/zscaler.secrets&quot;</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#1: initiating IKEv2 IKE SA</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w"> </span><span class="nb">local</span><span class="w"> </span>IKE<span class="w"> </span>proposals<span class="w"> </span><span class="o">(</span>IKE<span class="w"> </span>SA<span class="w"> </span>initiator<span class="w"> </span>selecting<span class="w"> </span>KE<span class="o">)</span>:
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w">   </span><span class="m">1</span>:IKE<span class="o">=</span>AES_CBC_256-HMAC_SHA2_256-HMAC_SHA2_256_128-MODP2048
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#1: STATE_PARENT_I1: sent v2I1, expected v2R1</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w"> </span><span class="nb">local</span><span class="w"> </span>ESP/AH<span class="w"> </span>proposals<span class="w"> </span><span class="o">(</span>IKE<span class="w"> </span>SA<span class="w"> </span>initiator<span class="w"> </span>emitting<span class="w"> </span>ESP/AH<span class="w"> </span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w">   </span><span class="m">1</span>:ESP<span class="o">=</span>NULL-HMAC_MD5_96-NONE-DISABLED
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: STATE_PARENT_I2: sent v2I2, expected v2R2 {auth=IKEv2 8 prf=HMAC_SHA2_256 group=MODP2048}</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: IKEv2 mode peer ID is ID_IPV4_ADDR: &#39;165.225.112.12&#39;</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: Authenticated using authby=secret</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: negotiated connection [0.0.0.0-255.255.255.255:0-65535 5 0]</span>
+pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: STATE_V2_IPSEC_I: IPsec SA established tunnel mode {ESP/NAT=&gt;0x6d394066 &lt;0xb319ec97 xfrm=NULL-HMAC_MD5_96 NATOA=none NATD=165.225.112.12:4500 DPD=active}</span>
+</code></pre></div>
+<h3 id="troubleshooting-ipsec-tunnels">Troubleshooting IPSec Tunnels<a class="headerlink" href="#troubleshooting-ipsec-tunnels" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>ipsec<span class="w"> </span>
+
+sudo<span class="w"> </span>ipsec<span class="w"> </span>whack<span class="w"> </span>--status
+sudo<span class="w"> </span>ipsec<span class="w"> </span>whack<span class="w"> </span>--trafficstatus
+
+sudo<span class="w"> </span>ip<span class="w"> </span>tunnel<span class="w"> </span>show
+
+
+<span class="c1"># capture IPSec traffic only</span>
+sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>eth0<span class="w"> </span>esp<span class="w"> </span>or<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">500</span><span class="w"> </span>or<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">4500</span>
+
+<span class="c1"># capture vti traffic (route-based)</span>
+sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>vti0
+</code></pre></div>
+<h2 id="dnatsnat">DNAT/SNAT<a class="headerlink" href="#dnatsnat" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>--dport<span class="w"> </span><span class="m">10101</span><span class="w"> </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">185</span>.46.212.88:10101
+sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-d<span class="w"> </span><span class="m">185</span>.46.212.88<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+
+<span class="c1"># make iptables rules persistent</span>
+<span class="c1"># non-interactive mode, saves currently applied rules</span>
+<span class="nb">echo</span><span class="w"> </span>iptables-persistent<span class="w"> </span>iptables-persistent/autosave_v4<span class="w"> </span>boolean<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>debconf-set-selections
+<span class="nb">echo</span><span class="w"> </span>iptables-persistent<span class="w"> </span>iptables-persistent/autosave_v6<span class="w"> </span>boolean<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>debconf-set-selections
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>iptables-persistent<span class="w"> </span>-y
+
+<span class="c1"># list iptables rules of the NAT table:</span>
+sudo<span class="w"> </span>iptables<span class="w"> </span>-nvL<span class="w"> </span>-t<span class="w"> </span>nat
+</code></pre></div>
+<p>The following happens here (example for route-based VPN):</p>
+<p>Incoming packet on <code>eth0</code> - <code>10.4.1.4</code> on port <code>10101</code> (internal PAC file <code>return "PROXY 10.4.1.4:10101"</code> statement)</p>
+<div class="highlight"><pre><span></span><code>source: 10.8.0.4:56780
+destination: 10.4.1.4:10101 (eth0)
+</code></pre></div>
+<p>First <code>iptables</code> rule changes the destination to the remote tunnel IP (DNAT, <code>PREROUTING</code> chain)</p>
+<div class="highlight"><pre><span></span><code>source: 10.8.0.4:56780
+destination: 185.46.212.88:10101 (remote VPN side)
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Forwarding decision is taken here -&gt; destination interface is <code>vti0</code> according to the routing table (that's why we need to set the route)</p>
+</div>
+<p>Second rule masquerades (SNATs, <code>POSTROUTING</code> chain) the packet behind the local interface (<code>eth0</code>) IP</p>
+<div class="highlight"><pre><span></span><code>source: 10.4.1.4:43210 (eth0)
+destination: 185.46.212.88:10101 (remote VPN side)
+</code></pre></div>
+<p>Forward the packet into the VPN tunnel (out <code>vti0</code> interface)</p>
+<p>Conntrack<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> will keep track of the mapping of original and translated source/destination <code>IP:port</code> tuples</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is the bare minimum <code>iptables</code> config and uses only NAT features. For an architectue deep dive for iptables check <a href="https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> here</a></p>
+</div>
+<h2 id="ha">HA<a class="headerlink" href="#ha" title="Permanent link">&para;</a></h2>
+<p>We can only use an internal Azure load balancer, and each VM needs its own public IP. </p>
+<p>In this setup, each server builds its own tunnels to Zscaler, and the load balancer distributes load from clients to the backend VMs. Both servers and the public IP resources should be allocated in different Availability Zones.</p>
+<p>On the ILB, set up a load balancing rule for TCP port <code>10101</code> to the backend VMs. Return the ILB frontend IP in the PAC file statement for the clients. Azure Load balancer will never SNAT, so client IPs are visible on the backend VMs (e.g. for <code>tcpdump</code> to capture)</p>
+<p><img alt="ipsec-ha" src="../assets/zsc-ipsec/ipsec-lb.png" /></p>
+<h2 id="netdata-libreswan-monitoring">Netdata Libreswan Monitoring<a class="headerlink" href="#netdata-libreswan-monitoring" title="Permanent link">&para;</a></h2>
+<p>As a bonus, Netdata can natively monitor Libreswan tunnels uptime and bytes in/out</p>
+<p><a href="https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels</a></p>
+<p>Add the netdata user to <code>/etc/sudoers.d/</code> to allow monitoring commands:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/sudoers.d/netdata</span>
+netdata<span class="w"> </span><span class="nv">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/sbin/ipsec<span class="w"> </span>whack<span class="w"> </span>--status
+netdata<span class="w"> </span><span class="nv">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/sbin/ipsec<span class="w"> </span>whack<span class="w"> </span>--trafficstatus
+
+<span class="c1"># chmod the file</span>
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>etc/sudoers.d/netdata
+</code></pre></div>
+<h2 id="costs">Costs<a class="headerlink" href="#costs" title="Permanent link">&para;</a></h2>
+<div class="admonition example">
+<p class="admonition-title">Example Costs</p>
+<p>VM: <code>Standard_D2sv3</code> ~$90/month</p>
+<p>LB: SKU <code>Standard</code> ~25/month with 1TB traffic forwarding</p>
+</div>
+<hr />
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://help.zscaler.com/zia/self-provisioning-static-ip-addresses"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Self-Provisioning of Static IP Addresses</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://arthurchiao.art/blog/conntrack-design-and-implementation/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Connection Tracking (conntrack): Design and Implementation Inside Linux Kernel</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://blog.cloudflare.com/conntrack-tales-one-thousand-and-one-flows/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Conntrack tales - one thousand and one flows</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://libreswan.org/wiki/images/a/a5/DevConf2016-IPsec.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> IPSec based VPN using Libreswan</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://help.zscaler.com/zia/configuring-dedicated-proxy-ports"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Configuring Dedicated Proxy Ports</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p><a href="https://help.zscaler.com/zia/writing-pac-file#return-statements"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Writing a PAC File</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.tracking", "toc.integrate", "search.suggest", "search.highlight", "search.share", "content.code.annotate", "content.code.copy", "content.tabs.link"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
+      
+    
+  </body>
+</html>
