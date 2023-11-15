@@ -10,6 +10,7 @@ tags:
   - linux
 
 comments: true
+authors: [jo]
 ---
 
 # Zscaler Tunnels on Azure - Part 2 - Linux IPSec
@@ -149,7 +150,7 @@ conn zscaler
 !!! tip
     In general, route-based vpn tunnels should be preferred to policy-based vpn tunnels. 
     
-    For example, route-based tunnels allow you to run routing protocols over the VPN connection. A very good article about the different types [here](https://weberblog.net/route-vs-policy-based-vpn-tunnels/)
+    For example, route-based tunnels allow you to run routing protocols over the VPN connection. A very good article about the different types [:octicons-link-external-16: here](https://weberblog.net/route-vs-policy-based-vpn-tunnels/)
 
 ### Policy-based VPN
 

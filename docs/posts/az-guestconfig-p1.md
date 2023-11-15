@@ -12,6 +12,7 @@ tags:
   - linux
 
 comments: true
+authors: [jo]
 ---
 
 # Azure Policy Guest Configuration for Linux - Part 1
@@ -129,7 +130,7 @@ GuestConfiguration = @{
             AllowPrerelease = $true
       }
    }
-   PSDesiredStateConfiguration = @{
+PSDesiredStateConfiguration = @{
       Version = '3.0.0-beta1'
       Parameters = @{
             AllowPrerelease = $true
@@ -186,7 +187,7 @@ GCFilePresent
 
 This configuration uses the predefined `nxtools` [:octicons-link-external-16: DSC resource](https://github.com/Azure/nxtools/blob/main/source/Examples/Resources/nxFile/1-CreateNxFile.ps1) `NxFile` to check if the file with content is present. If the target file doesn't exist exactly like described in the configuration (content, path, permissions), it will be created or modified.
 
-!!! note
+???+ tip
     To get rid of the `constrainedLanguage` vscode error in the dev container, import DSC with `import-module PSDesiredStateConfiguration` in the container terminal.
 
     ![policy](../assets/guestconfig/languageconstraints.png)
@@ -229,7 +230,7 @@ Build succeeded. 11 tasks, 0 errors, 0 warnings 00:00:12.7656214
 
 The package zip file is located in `/workspaces/guestconfiguration-linux/guestconfiguration/GCFilePresent/output/GCPackages/GCFilePresent_0.0.1.zip`
 
-The resulting zip file can be used in the next part to create the Guest Configuration Policy!
+The resulting zip file can be used in the [next part](az-guestconfig-p2.md) to create the Guest Configuration Policy!
 
 ## Resources
 

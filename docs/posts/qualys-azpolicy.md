@@ -10,6 +10,7 @@ tags:
   - qualys
 
 comments: true
+authors: [jo]
 ---
 
 # Deploy Qualys Cloud Agent with Azure Policy

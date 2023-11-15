@@ -9,6 +9,7 @@ tags:
   - ipgroup
 
 comments: true
+authors: [jo]
 ---
 
 # Troubleshooting failed IP group that causes an AzureFirewall to fail

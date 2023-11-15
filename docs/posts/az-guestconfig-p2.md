@@ -12,6 +12,7 @@ tags:
   - linux
 
 comments: true
+authors: [jo]
 ---
 
 # Azure Policy Guest Configuration for Linux - Part 2

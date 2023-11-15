@@ -9,6 +9,7 @@ tags:
   - vpn
 
 comments: true
+authors: [jo]
 ---
 
 # Zscaler Tunnels on Azure - Part 1 - VPN Gateway
