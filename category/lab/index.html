@@ -607,7 +607,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="azure-policy-guest-configuration-for-linux-part-2"><a class="toclink" href="../../2023-07-07-az-guestconfig-p2/">Azure Policy Guest Configuration for Linux - Part 2</a></h2>
-<p>Continuation of the <a href="../../2023-07-04-az-guestconfig-p1/">first part</a> of this series. The Guest Configuration Package is now ready to be tested and deployed!</p>
+<p>Continuation of the <a href="../../2023-07-04-az-guestconfig-p1/" target="_blank">first part</a> of this series. The Guest Configuration Package is now ready to be tested and deployed!</p>
 
     <nav class="md-post__action">
       <a href="../../2023-07-07-az-guestconfig-p2/">
@@ -704,7 +704,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="zscaler-tunnels-on-azure-part-2-linux-ipsec"><a class="toclink" href="../../2023-07-04-az-zscaler-ipsec/">Zscaler Tunnels on Azure - Part 2 - Linux IPSec</a></h2>
-<p>In my <a href="../../2023-07-04-az-zscaler-vpngw/">last post</a>, I created a IPSec tunnel to Zscaler using Azure VPN Gateway. Unfortunately, this setup does not work in a Virtual WAN environment, because <a href="https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-a-spoke-vnet-have-a-virtual-network-gateway"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> spoke Vnets can't have Vnet gateways</a>. Using VWAN VPN Gateways would make the VPN tunnel a branch, which is not what we need (I also want to avoid routing Public IPs internally).</p>
+<p>In my <a href="../../2023-07-04-az-zscaler-vpngw/" target="_blank">last post</a>, I created a IPSec tunnel to Zscaler using Azure VPN Gateway. Unfortunately, this setup does not work in a Virtual WAN environment, because <a href="https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-a-spoke-vnet-have-a-virtual-network-gateway" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> spoke Vnets can't have Vnet gateways</a>. Using VWAN VPN Gateways would make the VPN tunnel a branch, which is not what we need (I also want to avoid routing Public IPs internally).</p>
 <p>Another option would be to use the Linux server to do the DNAT and IPSec tunnel, so this is what we will explore here.</p>
 
     <nav class="md-post__action">
@@ -750,7 +750,7 @@
   </header>
   <div class="md-post__content md-typeset">
     <h2 id="zscaler-tunnels-on-azure-part-1-vpn-gateway"><a class="toclink" href="../../2023-07-04-az-zscaler-vpngw/">Zscaler Tunnels on Azure - Part 1 - VPN Gateway</a></h2>
-<p>This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway. The complete Lab setup including notes is available <a href="https://github.com/joxz/lab-az/tree/main/vpngw-zscaler"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> here</a> as bicep files with additional notes and outputs.</p>
+<p>This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway. The complete Lab setup including notes is available <a href="https://github.com/joxz/lab-az/tree/main/vpngw-zscaler" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> here</a> as bicep files with additional notes and outputs.</p>
 <p>The target setup should provide the options to forward traffic to the Zscaler tunnels in a default route and non-default route environment.</p>
 
     <nav class="md-post__action">
