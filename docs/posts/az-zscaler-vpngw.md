@@ -14,7 +14,7 @@ authors: [jo]
 
 # Zscaler Tunnels on Azure - Part 1 - VPN Gateway
 
-This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway. The complete Lab setup including notes is available [:octicons-link-external-16: here](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler) as bicep files with additional notes and outputs.
+This post will look at how to build IPSec tunnels to Zscaler on Azure with Azure VPN Gateway. The complete Lab setup including notes is available [:octicons-link-external-16: here](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler){target="_blank"} as bicep files with additional notes and outputs.
 
 The target setup should provide the options to forward traffic to the Zscaler tunnels in a default route and non-default route environment.
 <!-- more -->
@@ -23,7 +23,7 @@ The target setup should provide the options to forward traffic to the Zscaler tu
 
 ## Lab files
 
-Lab Notes [:octicons-link-external-16: here](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler)
+Lab Notes [:octicons-link-external-16: here](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler){target="_blank"}
 
 The lab can be deployed with the following command:
 
@@ -69,7 +69,7 @@ IKEv2 parameters used (for Phase 2 AES IPSec encryption an extra license is need
   ]
 ```
 
-Full config: [:octicons-link-external-16: vpngw.bicep](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vpngw.bicep)
+Full config: [:octicons-link-external-16: vpngw.bicep](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vpngw.bicep){target="_blank"}
 
 ### Zscaler
 
@@ -103,7 +103,7 @@ For peered Vnets, the option `Use the remote virtual network's gateway or Route 
 
 ## Non-Default Route Environment
 
-In this setup, the [:octicons-link-external-16: Zscaler Global Public Service Edge](https://help.zscaler.com/zia/about-global-zscaler-enforcement-nodes) IPs will be announced on the local network gateway. Those are anycast IPs advertised in every Zscaler datacenter. 
+In this setup, the [:octicons-link-external-16: Zscaler Global Public Service Edge](https://help.zscaler.com/zia/about-global-zscaler-enforcement-nodes){target="_blank"} IPs will be announced on the local network gateway. Those are anycast IPs advertised in every Zscaler datacenter. 
 
 Also, some form of DNAT is needed - either with a NVA firewall appliance (e.g. Fortigate) or a Linux NVA with iptables DNAT. The client IP will not be preserved with DNAT and only NVA IPs be visible in the Zscaler logs.
 
@@ -145,13 +145,13 @@ graph LR
 
     In this example, if the first proxy node is not reachable, it will fall back to the second one; if that's not reachable, traffic will go direct
 
-If SNAT port exhaustion is an issue, the `net.ipv4.ip_local_port_range` setting (see: [:octicons-link-external-16: here](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler#snat-ports)) should be adjusted, or multiple ip addresses can be assigned to a NIC in Azure [^4]
+If SNAT port exhaustion is an issue, the `net.ipv4.ip_local_port_range` setting (see: [:octicons-link-external-16: here](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler#snat-ports){target="_blank"}) should be adjusted, or multiple ip addresses can be assigned to a NIC in Azure [^4]
 
 #### NVA Provisioning
 
 The Linux NVAs don't need much config, they are basically just a NAT gateway. However, to make the configuration easy and persistent across reboots, the VM can be provisioned with the correct settings with `cloud-init`[^3]
 
-`cloud-init` scripts can be added to Azure VMs during creation with the --custom-data switch (e.g. Lab repo [:octicons-link-external-16: vmss.bicep](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L105))
+`cloud-init` scripts can be added to Azure VMs during creation with the --custom-data switch (e.g. Lab repo [:octicons-link-external-16: vmss.bicep](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L105){target="_blank"})
 
 Sample `cloud-config.yml`:
 
@@ -177,7 +177,7 @@ write_file:
     append: true
 ```
 
-The config file will enable IP forwarding, set the `iptables`rules and make those persistent across reboots. Also, [:octicons-link-external-16: Netdata](https://github.com/netdata/netdata) will be installed for monitoring and is available at: `http://<VMIP>:19999`
+The config file will enable IP forwarding, set the `iptables`rules and make those persistent across reboots. Also, [:octicons-link-external-16: Netdata](https://github.com/netdata/netdata){target="_blank"} will be installed for monitoring and is available at: `http://<VMIP>:19999`
 
 IP forwarding also needs to be enabled on the network interface resource in Azure:
 
@@ -185,7 +185,7 @@ IP forwarding also needs to be enabled on the network interface resource in Azur
 
 #### NVA as VMSS
 
-The Linux NVA can also be deployed as a VMSS, with that we can achieve scalability (manual or autoscaling) and resiliency by placing instances in different AZs (see: [:octicons-link-external-16: vmss.bicep#zones](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L84)). For load balancing the VMSS, Azure Load Balancer will be used (see: [:octicons-link-external-16: vmss.bicep#ilb resource](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L8))
+The Linux NVA can also be deployed as a VMSS, with that we can achieve scalability (manual or autoscaling) and resiliency by placing instances in different AZs (see: [:octicons-link-external-16: vmss.bicep#zones](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L84){target="_blank"}). For load balancing the VMSS, Azure Load Balancer will be used (see: [:octicons-link-external-16: vmss.bicep#ilb resource](https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L8){target="_blank"})
 
 !!! note
     Currently `cloud-init` settings can not be updated on a deployed VMSS with CLI or Powershell [^5], so updating VMSS instances with new settings is probably best done with an OS image gallery and updating the image.
@@ -232,8 +232,8 @@ jo@vm-gwsn:~$ tcpdump -i eth0 'port 10101'
 
 ---
 
-[^1]: [:octicons-link-external-16: Understanding IPSec VPNs](https://help.zscaler.com/zia/understanding-ipsec-vpns#ikev2-supported-parameters)
-[^2]: [:octicons-link-external-16: Configuring Dedicated Proxy Ports](https://help.zscaler.com/zia/configuring-dedicated-proxy-ports)
-[^3]: [:octicons-link-external-16: cloud-init support for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/using-cloud-init)
-[^4]: [:octicons-link-external-16: Assign multiple IP addresses to virtual machines using the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-network-multiple-ip-addresses-portal)
-[^5]: [:octicons-link-external-16: Lab Notes - Linux NVA as VMSS](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler#linux-nva-as-vmss)
+[^1]: [:octicons-link-external-16: Understanding IPSec VPNs](https://help.zscaler.com/zia/understanding-ipsec-vpns#ikev2-supported-parameters){target="_blank"}
+[^2]: [:octicons-link-external-16: Configuring Dedicated Proxy Ports](https://help.zscaler.com/zia/configuring-dedicated-proxy-ports){target="_blank"}
+[^3]: [:octicons-link-external-16: cloud-init support for virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/using-cloud-init){target="_blank"}
+[^4]: [:octicons-link-external-16: Assign multiple IP addresses to virtual machines using the Azure portal](https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/virtual-network-multiple-ip-addresses-portal){target="_blank"}
+[^5]: [:octicons-link-external-16: Lab Notes - Linux NVA as VMSS](https://github.com/joxz/lab-az/tree/main/vpngw-zscaler#linux-nva-as-vmss){target="_blank"}

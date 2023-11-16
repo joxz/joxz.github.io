@@ -17,7 +17,7 @@ authors: [jo]
 
 # Azure Policy Guest Configuration for Linux - Part 2
 
-Continuation of the [first part](az-guestconfig-p1.md/) of this series. The Guest Configuration Package is now ready to be tested and deployed!
+Continuation of the [first part](az-guestconfig-p1.md/){target="_blank"} of this series. The Guest Configuration Package is now ready to be tested and deployed!
 <!-- more -->
 
 Make sure you're signed in to Azure in the dev container `pwsh` session for this part:
@@ -70,7 +70,7 @@ TESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTESTTEST
 
 ## Publishing the Package
 
-To publish the package, a storage account is needed ([:octicons-link-external-16: communication via private endpoints is supported](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview#communicate-over-private-link-in-azure)), and the package must be uploaded to blob storage. Please follow the steps outlined [:octicons-link-external-16: here](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-publish-package#publish-a-configuration-package) on how to do that.
+To publish the package, a storage account is needed ([:octicons-link-external-16: communication via private endpoints is supported](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview#communicate-over-private-link-in-azure){target="_blank"}), and the package must be uploaded to blob storage. Please follow the steps outlined [:octicons-link-external-16: here](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-publish-package#publish-a-configuration-package){target="_blank"} on how to do that.
 
 The resulting blob URL stored in `$contentUri` you need for the next step should look like this:
 
@@ -91,7 +91,7 @@ Please make sure the `$contentUri` variable is set correctly
 
 ## Create a Policy Definition
 
-Detailed explanations for this step are available [:octicons-link-external-16: here](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#create-an-azure-policy-definition)
+Detailed explanations for this step are available [:octicons-link-external-16: here](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#create-an-azure-policy-definition){target="_blank"}
 
 ```pwsh
 ➜ $policyid = $(new-guid)
@@ -120,7 +120,7 @@ This will create a policy definition in `policies/GCFilePresent_DeployIfNotExist
     `Mode = 'ApplyAndAutoCorrect'` creates a `DeployIfNotExists` policy. That means, the policy needs to create a managed identity with the assignment so it has the permissions (`Guest Configuration Resource Contributor`) to create remediation tasks
 
 !!! note
-    [:octicons-link-external-16: Using parameters in custom machine configuration policy definitions](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#using-parameters-in-custom-machine-configuration-policy-definitions) did not work for me, it would always require the `ResourcePropertyValue` parameter. Setting this parameter would kill the whole parameterization idea. This is probably an error in the module, or I'm missing/overseeing something...
+    [:octicons-link-external-16: Using parameters in custom machine configuration policy definitions](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#using-parameters-in-custom-machine-configuration-policy-definitions){target="_blank"} did not work for me, it would always require the `ResourcePropertyValue` parameter. Setting this parameter would kill the whole parameterization idea. This is probably an error in the module, or I'm missing/overseeing something...
 
 ## Register Policy Definition
 
@@ -142,6 +142,6 @@ In the next part we will take a look at the policy dashboard, VM agent, how fast
 
 ## More Resources
 
-- [:octicons-link-external-16: Policy Lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#policy-lifecycle)
-- [:octicons-link-external-16: Remix with a Twist: 7 steps to author, develop, and deploy custom recommendations for Windows using Guest Configuration](https://swiftsolves.substack.com/p/remix-with-a-twist-7-steps-to-author)
-- [:octicons-link-external-16: Azure Governance: how to control system configurations in hybrid and multicloud environments](https://francescomolfese.it/en/2021/04/azure-governance-come-controllare-le-configurazioni-dei-sistemi-in-ambienti-ibridi-e-multicloud/)
+- [:octicons-link-external-16: Policy Lifecycle](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-policy-definition#policy-lifecycle){target="_blank"}
+- [:octicons-link-external-16: Remix with a Twist: 7 steps to author, develop, and deploy custom recommendations for Windows using Guest Configuration](https://swiftsolves.substack.com/p/remix-with-a-twist-7-steps-to-author){target="_blank"}
+- [:octicons-link-external-16: Azure Governance: how to control system configurations in hybrid and multicloud environments](https://francescomolfese.it/en/2021/04/azure-governance-come-controllare-le-configurazioni-dei-sistemi-in-ambienti-ibridi-e-multicloud/){target="_blank"}

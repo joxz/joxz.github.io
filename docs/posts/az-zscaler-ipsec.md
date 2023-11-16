@@ -15,7 +15,7 @@ authors: [jo]
 
 # Zscaler Tunnels on Azure - Part 2 - Linux IPSec
 
-In my [last post](az-zscaler-vpngw.md), I created a IPSec tunnel to Zscaler using Azure VPN Gateway. Unfortunately, this setup does not work in a Virtual WAN environment, because [:octicons-link-external-16: spoke Vnets can't have Vnet gateways](https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-a-spoke-vnet-have-a-virtual-network-gateway). Using VWAN VPN Gateways would make the VPN tunnel a branch, which is not what we need (I also want to avoid routing Public IPs internally).
+In my [last post](az-zscaler-vpngw.md){target="_blank"}, I created a IPSec tunnel to Zscaler using Azure VPN Gateway. Unfortunately, this setup does not work in a Virtual WAN environment, because [:octicons-link-external-16: spoke Vnets can't have Vnet gateways](https://learn.microsoft.com/en-us/azure/virtual-wan/virtual-wan-faq#can-a-spoke-vnet-have-a-virtual-network-gateway){target="_blank"}. Using VWAN VPN Gateways would make the VPN tunnel a branch, which is not what we need (I also want to avoid routing Public IPs internally).
 
 Another option would be to use the Linux server to do the DNAT and IPSec tunnel, so this is what we will explore here.
 
@@ -38,7 +38,7 @@ Note: Port `10101` is a Zscaler Dedicated Proxy Port (DPP)[^5], but also all oth
 
 ## IPSec on Linux
 
-There are multiple options for building IPSec tunnels in Linux: e.g. [:octicons-link-external-16: Libreswan](https://libreswan.org/), [:octicons-link-external-16: Strongswan](https://www.strongswan.org/), [:octicons-link-external-16: Openswan](https://openswan.org/)
+There are multiple options for building IPSec tunnels in Linux: e.g. [:octicons-link-external-16: Libreswan](https://libreswan.org/){target="_blank"}, [:octicons-link-external-16: Strongswan](https://www.strongswan.org/){target="_blank"}, [:octicons-link-external-16: Openswan](https://openswan.org/){target="_blank"}
 
 For no particular reason, we will build the site-to-site tunnel with Libreswan[^4] in this example.
 
@@ -100,13 +100,13 @@ fra4-vpn.zscaler.net : PSK "$sCAkcUwe434DwK4c54qBLw9H8G"
 
 ### Tunnel Basics
 
-[:octicons-link-external-16: Libreswan ipsec.conf settings](https://libreswan.org/man/ipsec.conf.5.html)
+[:octicons-link-external-16: Libreswan ipsec.conf settings](https://libreswan.org/man/ipsec.conf.5.html){target="_blank"}
 
-[:octicons-link-external-16: Libreswan configuration examples](https://libreswan.org/wiki/Configuration_examples)
+[:octicons-link-external-16: Libreswan configuration examples](https://libreswan.org/wiki/Configuration_examples){target="_blank"}
 
-[:octicons-link-external-16: Zscaler IPSec parameters](https://help.zscaler.com/zia/understanding-ipsec-vpns#ikev2-supported-parameters)
+[:octicons-link-external-16: Zscaler IPSec parameters](https://help.zscaler.com/zia/understanding-ipsec-vpns#ikev2-supported-parameters){target="_blank"}
 
-[:octicons-link-external-16: Zscaler Global Public Service Edge](https://help.zscaler.com/zia/about-global-zscaler-enforcement-nodes)
+[:octicons-link-external-16: Zscaler Global Public Service Edge](https://help.zscaler.com/zia/about-global-zscaler-enforcement-nodes){target="_blank"}
 
 !!! important
     `leftid` needs to be set to the VM public IP (this one should also be added to Zscaler Static IPs[^1])
@@ -321,7 +321,7 @@ Forward the packet into the VPN tunnel (out `vti0` interface)
 Conntrack[^2] will keep track of the mapping of original and translated source/destination `IP:port` tuples
 
 !!! note
-    This is the bare minimum `iptables` config and uses only NAT features. For an architectue deep dive for iptables check [:octicons-link-external-16: here](https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture)
+    This is the bare minimum `iptables` config and uses only NAT features. For an architectue deep dive for iptables check [:octicons-link-external-16: here](https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture){target="_blank"}
 
 ## HA
 
@@ -337,7 +337,7 @@ On the ILB, set up a load balancing rule for TCP port `10101` to the backend VMs
 
 As a bonus, Netdata can natively monitor Libreswan tunnels uptime and bytes in/out
 
-[:octicons-link-external-16: https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels](https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels)
+[:octicons-link-external-16: https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels](https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels){target="_blank"}
 
 Add the netdata user to `/etc/sudoers.d/` to allow monitoring commands:
 
@@ -360,9 +360,9 @@ sudo chmod 600 etc/sudoers.d/netdata
 
 ---
 
-[^1]: [:octicons-link-external-16: Self-Provisioning of Static IP Addresses](https://help.zscaler.com/zia/self-provisioning-static-ip-addresses)
-[^2]: [:octicons-link-external-16: Connection Tracking (conntrack): Design and Implementation Inside Linux Kernel](https://arthurchiao.art/blog/conntrack-design-and-implementation/)
-[^3]: [:octicons-link-external-16: Conntrack tales - one thousand and one flows](https://blog.cloudflare.com/conntrack-tales-one-thousand-and-one-flows/)
-[^4]: [:octicons-link-external-16: IPSec based VPN using Libreswan](https://libreswan.org/wiki/images/a/a5/DevConf2016-IPsec.pdf)
-[^5]: [:octicons-link-external-16: Configuring Dedicated Proxy Ports](https://help.zscaler.com/zia/configuring-dedicated-proxy-ports)
-[^6]: [:octicons-link-external-16: Writing a PAC File](https://help.zscaler.com/zia/writing-pac-file#return-statements)
+[^1]: [:octicons-link-external-16: Self-Provisioning of Static IP Addresses](https://help.zscaler.com/zia/self-provisioning-static-ip-addresses){target="_blank"}
+[^2]: [:octicons-link-external-16: Connection Tracking (conntrack): Design and Implementation Inside Linux Kernel](https://arthurchiao.art/blog/conntrack-design-and-implementation/){target="_blank"}
+[^3]: [:octicons-link-external-16: Conntrack tales - one thousand and one flows](https://blog.cloudflare.com/conntrack-tales-one-thousand-and-one-flows/){target="_blank"}
+[^4]: [:octicons-link-external-16: IPSec based VPN using Libreswan](https://libreswan.org/wiki/images/a/a5/DevConf2016-IPsec.pdf){target="_blank"}
+[^5]: [:octicons-link-external-16: Configuring Dedicated Proxy Ports](https://help.zscaler.com/zia/configuring-dedicated-proxy-ports){target="_blank"}
+[^6]: [:octicons-link-external-16: Writing a PAC File](https://help.zscaler.com/zia/writing-pac-file#return-statements){target="_blank"}

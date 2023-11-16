@@ -163,4 +163,4 @@ I have to rethink if using IP Groups make sense to use. They seem to be a freque
 Grouping IPs and other objects in firewall policies is such an essential and basic feature that it shouldn't be the cause of any problems, ever. 
 
 
-[^1]: [:octicons-link-external-16: Troubleshoot Azure Microsoft.Network failed provisioning state](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state#microsoftnetworkazurefirewalls)
+[^1]: [:octicons-link-external-16: Troubleshoot Azure Microsoft.Network failed provisioning state](https://learn.microsoft.com/en-us/azure/networking/troubleshoot-failed-state#microsoftnetworkazurefirewalls){target="_blank"}

@@ -17,7 +17,7 @@ authors: [jo]
 
 Qualys Cloud Agent is available as an Azure VM extension[^1]. This makes mass-deployment of the agent with Azure Policy very enjoyable. This post will go through the components of the `DeployIfNotExists` policy, remediation and troubleshooting.
 
-[:simple-github: Github Repo Link](https://github.com/joxz/azure-policy/tree/main/vms/qualys)
+[:simple-github: Github Repo Link](https://github.com/joxz/azure-policy/tree/main/vms/qualys){target="_blank"}
 
 <!-- more -->
 
@@ -26,7 +26,7 @@ Qualys Cloud Agent is available as an Azure VM extension[^1]. This makes mass-de
 - [x] Qualys License Code
 - [x] Windows and Linux Azure VMs for testing
 - [x] Read how VM extensions for Windows[^2] and Linux[^3] work
-- [x] Policy Definitions from the repo - [:simple-github:](https://github.com/joxz/azure-policy/tree/main/vms/qualys)
+- [x] Policy Definitions from the repo - [:simple-github:](https://github.com/joxz/azure-policy/tree/main/vms/qualys){target="_blank"}
 - [x] Knowledge about ARM templates[^5] and `DeployIfNotExists` policies[^4]
 
 Extension infos to be used in policies:
@@ -40,7 +40,7 @@ Extension infos to be used in policies:
 
 ## Policy Definitions
 
-The JSON definitions in the [:simple-github: Github Repo](https://github.com/joxz/azure-policy/tree/main/vms/qualys) can be converted to Azure Policy Defintions with Powershell:
+The JSON definitions in the [:simple-github: Github Repo](https://github.com/joxz/azure-policy/tree/main/vms/qualys){target="_blank"} can be converted to Azure Policy Defintions with Powershell:
 
 ``` pwsh
 New-AzPolicyDefinition -Name 'Policyname' -DisplayName 'Displayname of the policy' -Policy './difne-linux-qualys.json'
@@ -192,7 +192,7 @@ With `existenceCondition` we can check for child resources of `Microsoft.Compute
 
 ### ARM Template Deployment
 
-Qualys also provides an ARM template for agent deployment on [:simple-github: Github](https://github.com/Qualys/CloudAgent-Azure-ARMTemplate). That template can be slightly modified and used to deploy the agent with the policy.
+Qualys also provides an ARM template for agent deployment on [:simple-github: Github](https://github.com/Qualys/CloudAgent-Azure-ARMTemplate){target="_blank"}. That template can be slightly modified and used to deploy the agent with the policy.
 
 === "Windows"
     ```json
@@ -248,7 +248,7 @@ Qualys also provides an ARM template for agent deployment on [:simple-github: Gi
     ```
 
     1. Parameters passed from the policy to the ARM template
-    2. The `name` property has to be `{vmName}/QualysAgent`. `vmName` will be passed by the policy through parameters (see [:simple-github: full policy definition](https://github.com/joxz/azure-policy/blob/main/vms/qualys/difne-win-qualys.json#L114)) to the template
+    2. The `name` property has to be `{vmName}/QualysAgent`. `vmName` will be passed by the policy through parameters (see [:simple-github: full policy definition](https://github.com/joxz/azure-policy/blob/main/vms/qualys/difne-win-qualys.json#L114){target="_blank"}) to the template
 
 === "Linux"
     ```json
@@ -304,7 +304,7 @@ Qualys also provides an ARM template for agent deployment on [:simple-github: Gi
     ```
 
     1. Parameters passed from the policy to the ARM template
-    2. The `name` property has to be `{vmName}/QualysAgentLinux`. `vmName` will be passed by the policy through parameters (see [:simple-github: full policy definition](https://github.com/joxz/azure-policy/blob/main/vms/qualys/difne-linux-qualys.json#L114)) to the template
+    2. The `name` property has to be `{vmName}/QualysAgentLinux`. `vmName` will be passed by the policy through parameters (see [:simple-github: full policy definition](https://github.com/joxz/azure-policy/blob/main/vms/qualys/difne-linux-qualys.json#L114){target="_blank"}) to the template
 
 ## Policy Assignment
 
@@ -325,7 +325,7 @@ Qualys also provides an ARM template for agent deployment on [:simple-github: Gi
 
 `DeployIfNotExists` policies require a managed identity to be created. The managed identity is assigned the permissions defined in the `roleDefinitionIds` property.
 
-In this case, `/providers/microsoft.authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c` is the ID of the built-in `Virtual Machine Contributor` role, see [:octicons-link-external-16: AzRoleAdvertizer - Virtual Machine Contributor](https://www.azadvertizer.net/azrolesadvertizer/9980e02c-c2be-4d73-94e8-173b1dc7cf3c.html)
+In this case, `/providers/microsoft.authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c` is the ID of the built-in `Virtual Machine Contributor` role, see [:octicons-link-external-16: AzRoleAdvertizer - Virtual Machine Contributor](https://www.azadvertizer.net/azrolesadvertizer/9980e02c-c2be-4d73-94e8-173b1dc7cf3c.html){target="_blank"}
 
 RBAC custom roles can also be created and used, the minimum permissions needed are:
 
@@ -442,9 +442,9 @@ Install extension with AzCLI:
     Config files: `/etc/qualys/cloud-agent/`
 
 
-[^1]: [:octicons-link-external-16: Azure virtual machine extensions and features](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/overview)
-[^2]: [:octicons-link-external-16: Virtual machine extensions and features for Windows](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-windows)
-[^3]: [:octicons-link-external-16: Virtual machine extensions and features for Linux](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?tabs=azure-cli)
-[^4]: [:octicons-link-external-16: Understand Policy Effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects#deployifnotexists)
-[^5]: [:octicons-link-external-16: What are ARM templates?](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview)
-[^6]: [:octicons-link-external-16: Cloud Agent Platform Availability Matrix](https://success.qualys.com/support/s/article/000006675)
+[^1]: [:octicons-link-external-16: Azure virtual machine extensions and features](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/overview){target="_blank"}
+[^2]: [:octicons-link-external-16: Virtual machine extensions and features for Windows](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-windows){target="_blank"}
+[^3]: [:octicons-link-external-16: Virtual machine extensions and features for Linux](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/features-linux?tabs=azure-cli){target="_blank"}
+[^4]: [:octicons-link-external-16: Understand Policy Effects](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects#deployifnotexists){target="_blank"}
+[^5]: [:octicons-link-external-16: What are ARM templates?](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview){target="_blank"}
+[^6]: [:octicons-link-external-16: Cloud Agent Platform Availability Matrix](https://success.qualys.com/support/s/article/000006675){target="_blank"}

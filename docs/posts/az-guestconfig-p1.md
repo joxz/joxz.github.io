@@ -154,7 +154,7 @@ GitHubConfig:
 ```
 
 !!! info
-    Not describing all the steps, for detailed steps check [:octicons-link-external-16: here](https://github.com/gaelcolas/Sampler#gcpackage-scaffolding)
+    Not describing all the steps, for detailed steps check [:octicons-link-external-16: here](https://github.com/gaelcolas/Sampler#gcpackage-scaffolding){target="_blank"}
 
 ### Guest Configuration Package Authoring
 
@@ -185,7 +185,7 @@ Configuration GCFilePresent {
 GCFilePresent
 ```
 
-This configuration uses the predefined `nxtools` [:octicons-link-external-16: DSC resource](https://github.com/Azure/nxtools/blob/main/source/Examples/Resources/nxFile/1-CreateNxFile.ps1) `NxFile` to check if the file with content is present. If the target file doesn't exist exactly like described in the configuration (content, path, permissions), it will be created or modified.
+This configuration uses the predefined `nxtools` [:octicons-link-external-16: DSC resource](https://github.com/Azure/nxtools/blob/main/source/Examples/Resources/nxFile/1-CreateNxFile.ps1){target="_blank"} `NxFile` to check if the file with content is present. If the target file doesn't exist exactly like described in the configuration (content, path, permissions), it will be created or modified.
 
 ???+ tip
     To get rid of the `constrainedLanguage` vscode error in the dev container, import DSC with `import-module PSDesiredStateConfiguration` in the container terminal.
@@ -230,25 +230,25 @@ Build succeeded. 11 tasks, 0 errors, 0 warnings 00:00:12.7656214
 
 The package zip file is located in `/workspaces/guestconfiguration-linux/guestconfiguration/GCFilePresent/output/GCPackages/GCFilePresent_0.0.1.zip`
 
-The resulting zip file can be used in the [next part](az-guestconfig-p2.md) to create the Guest Configuration Policy!
+The resulting zip file can be used in the [next part](az-guestconfig-p2.md){target="_blank"} to create the Guest Configuration Policy!
 
 ## Resources
 
 A list of resources I used to research this topic:
 
-- [:octicons-link-external-16: Understand the machine configuration feature of Azure Automanage](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview)
-- [:octicons-link-external-16: Audit server settings with Azure Policy Guest Configuration](https://www.thomasmaurer.ch/2021/03/audit-server-settings-with-azure-policy-guest-configuration/)
-- [:octicons-link-external-16: Persistence with Azure Policy Guest Configuration](https://cloudbrothers.info/azure-persistence-azure-policy-guest-configuration/)
-- [:octicons-link-external-16: Azure Guest Policy Configuration – A look behind the curtain](https://marcelzehner.ch/2020/04/05/azure-guest-policy-configuration-a-look-behind-the-curtain/)
-- [:octicons-link-external-16: Writing a custom DSC resource with PowerShell classes](https://learn.microsoft.com/en-us/powershell/dsc/resources/authoringresourceclass?view=dsc-1.1)
-- [:octicons-link-external-16: nxtools](https://github.com/Azure/nxtools/)
-- [:octicons-link-external-16: Writing DSC Resources for Azure Policy Guest Configuration - For Linux! by Gael Colas](https://www.youtube.com/watch?v=RxnxpZqvEmg)
+- [:octicons-link-external-16: Understand the machine configuration feature of Azure Automanage](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview){target="_blank"}
+- [:octicons-link-external-16: Audit server settings with Azure Policy Guest Configuration](https://www.thomasmaurer.ch/2021/03/audit-server-settings-with-azure-policy-guest-configuration/){target="_blank"}
+- [:octicons-link-external-16: Persistence with Azure Policy Guest Configuration](https://cloudbrothers.info/azure-persistence-azure-policy-guest-configuration/){target="_blank"}
+- [:octicons-link-external-16: Azure Guest Policy Configuration – A look behind the curtain](https://marcelzehner.ch/2020/04/05/azure-guest-policy-configuration-a-look-behind-the-curtain/){target="_blank"}
+- [:octicons-link-external-16: Writing a custom DSC resource with PowerShell classes](https://learn.microsoft.com/en-us/powershell/dsc/resources/authoringresourceclass?view=dsc-1.1){target="_blank"}
+- [:octicons-link-external-16: nxtools](https://github.com/Azure/nxtools/){target="_blank"}
+- [:octicons-link-external-16: Writing DSC Resources for Azure Policy Guest Configuration - For Linux! by Gael Colas](https://www.youtube.com/watch?v=RxnxpZqvEmg){target="_blank"}
 
 ---
 
-[^1]: [:octicons-link-external-16: Install the extension](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/guest-configuration#install-the-extension)
-[^2]: [:octicons-link-external-16: Author a configuration](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-package#author-a-configuration)
-[^3]: [:octicons-link-external-16: Dev Container Features reference](https://containers.dev/implementors/features/)
-[^4]: [:octicons-link-external-16: GCPackage scaffolding](https://github.com/gaelcolas/Sampler#gcpackage-scaffolding)
-[^5]: [:octicons-link-external-16: Supported client types](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview#supported-client-types)
-[^6]: [:octicons-link-external-16: Base requirements](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-set-up-authoring-environment#base-requirements)
+[^1]: [:octicons-link-external-16: Install the extension](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/guest-configuration#install-the-extension){target="_blank"}
+[^2]: [:octicons-link-external-16: Author a configuration](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-create-package#author-a-configuration){target="_blank"}
+[^3]: [:octicons-link-external-16: Dev Container Features reference](https://containers.dev/implementors/features/){target="_blank"}
+[^4]: [:octicons-link-external-16: GCPackage scaffolding](https://github.com/gaelcolas/Sampler#gcpackage-scaffolding){target="_blank"}
+[^5]: [:octicons-link-external-16: Supported client types](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview#supported-client-types){target="_blank"}
+[^6]: [:octicons-link-external-16: Base requirements](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/how-to-set-up-authoring-environment#base-requirements){target="_blank"}
