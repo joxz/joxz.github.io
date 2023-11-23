@@ -42,7 +42,7 @@
   
   
   
-  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/></svg>');}</style>
 
 
     
@@ -432,11 +432,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../category/how-to/" class="md-nav__link">
+      <a href="../category/troubleshooting/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    how-to
+    troubleshooting
   </span>
   
 
@@ -452,11 +452,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../category/troubleshooting/" class="md-nav__link">
+      <a href="../category/how-to/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    troubleshooting
+    how-to
   </span>
   
 
@@ -723,41 +723,41 @@
 <p><code>AZ-GLOBAL-VHUB-AFW-POLICY</code> is the parent policy and utilizes IP Groups in 'Failed' state and is not modifyable anymore. Updates to rule collections fail with the error message: <code>Put on Firewall Policy AZ-GLOBAL-VHUB-AFW-POLICY Failed with 1 faulted referenced firewalls</code></p>
 <p><img alt="global-failed" src="../assets/ipgroup-azfw/global_failed.png" /></p>
 <p>List of all IP Groups:</p>
-<div class="highlight"><pre><span></span><code>➜ az network ip-group list -o table
-
-Location    Name                                ProvisioningState    ResourceGroup
-----------  ----------------------------------  -------------------  ----------------------
-westeurope  AZ-GLOBAL-IPGROUP-AGWS              Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-AV                Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-PRIVATEIPS        Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ISE-ALL           Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ISE-BCK           Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ISE-GUEST-PORTAL  Failed               AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ISE-MNT           Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ISE-PAN           Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ISE-PSN           Failed               AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ADDC-AZURE        Succeeded            AZ-GLOBAL-NETWORK-RG01
-westeurope  AZ-GLOBAL-IPGROUP-ADDC-ONPREM       Succeeded            AZ-GLOBAL-NETWORK-RG01
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>➜ az network ip-group list -o table
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Location    Name                                ProvisioningState    ResourceGroup
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>----------  ----------------------------------  -------------------  ----------------------
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>westeurope  AZ-GLOBAL-IPGROUP-AGWS              Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>westeurope  AZ-GLOBAL-IPGROUP-AV                Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>westeurope  AZ-GLOBAL-IPGROUP-PRIVATEIPS        Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>westeurope  AZ-GLOBAL-IPGROUP-ISE-ALL           Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>westeurope  AZ-GLOBAL-IPGROUP-ISE-BCK           Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>westeurope  AZ-GLOBAL-IPGROUP-ISE-GUEST-PORTAL  Failed               AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>westeurope  AZ-GLOBAL-IPGROUP-ISE-MNT           Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>westeurope  AZ-GLOBAL-IPGROUP-ISE-PAN           Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>westeurope  AZ-GLOBAL-IPGROUP-ISE-PSN           Failed               AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>westeurope  AZ-GLOBAL-IPGROUP-ADDC-AZURE        Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>westeurope  AZ-GLOBAL-IPGROUP-ADDC-ONPREM       Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span></code></pre></div>
 <p>List of all AzureFirewall resources:</p>
-<div class="highlight"><pre><span></span><code>➜ az network firewall list -o table
-
-Location       Name                          ProvisioningState    ResourceGroup
--------------  ----------------------------  -------------------  ----------------------
-northeurope    AzureFirewall_AZ-NEUR-VHUB01  Failed               az-global-network-rg01
-westeurope     AzureFirewall_AZ-WEUR-VHUB01  Succeeded            AZ-GLOBAL-NETWORK-RG01
-southeastasia  AzureFirewall_AZ-SEA-VHUB01   Succeeded            AZ-GLOBAL-NETWORK-RG01
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>➜ az network firewall list -o table
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Location       Name                          ProvisioningState    ResourceGroup
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>-------------  ----------------------------  -------------------  ----------------------
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>northeurope    AzureFirewall_AZ-NEUR-VHUB01  Failed               az-global-network-rg01
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>westeurope     AzureFirewall_AZ-WEUR-VHUB01  Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>southeastasia  AzureFirewall_AZ-SEA-VHUB01   Succeeded            AZ-GLOBAL-NETWORK-RG01
+</span></code></pre></div>
 <p>List of all AzureFirewall policies:</p>
-<div class="highlight"><pre><span></span><code>➜ az network firewall policy list -o table
-
-Location    Name                       ProvisioningState    ResourceGroup           ThreatIntelMode
-----------  -------------------------  -------------------  ----------------------  -----------------
-westeurope  AZ-GLOBAL-VHUB-AFW-POLICY  Failed               AZ-GLOBAL-NETWORK-RG01  Alert
-westeurope  AZ-NEUR-VHUB-AFW-POLICY    Succeeded            AZ-GLOBAL-NETWORK-RG01  Alert
-westeurope  AZ-WEUR-VHUB-AFW-POLICY    Succeeded            AZ-GLOBAL-NETWORK-RG01  Alert
-westeurope  AZ-SEA-VHUB-AFW-POLICY     Succeeded            AZ-GLOBAL-NETWORK-RG01  Deny
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>➜ az network firewall policy list -o table
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Location    Name                       ProvisioningState    ResourceGroup           ThreatIntelMode
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>----------  -------------------------  -------------------  ----------------------  -----------------
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>westeurope  AZ-GLOBAL-VHUB-AFW-POLICY  Failed               AZ-GLOBAL-NETWORK-RG01  Alert
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>westeurope  AZ-NEUR-VHUB-AFW-POLICY    Succeeded            AZ-GLOBAL-NETWORK-RG01  Alert
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>westeurope  AZ-WEUR-VHUB-AFW-POLICY    Succeeded            AZ-GLOBAL-NETWORK-RG01  Alert
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>westeurope  AZ-SEA-VHUB-AFW-POLICY     Succeeded            AZ-GLOBAL-NETWORK-RG01  Deny
+</span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code>AZ-GLOBAL-VHUB-AFW-POLICY</code> (parent policy) and <code>AzureFirewall_AZ-NEUR-VHUB01</code> are failed, <code>AZ-SEA-VHUB-AFW-POLICY</code> (child policy) is succeeded</p>
@@ -772,8 +772,8 @@ westeurope  AZ-SEA-VHUB-AFW-POLICY     Succeeded            AZ-GLOBAL-NETWORK-RG
 <p class="admonition-title">Important</p>
 <p>The parent policy should now be modifyable again (Succeeded state)</p>
 <p>If the parent policy is still failed, a <code>PUT</code> operation<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> can be used to get to 'Succeeded' state:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">Get-AzFirewall</span> <span class="n">-Name</span> <span class="s2">&quot;AZ-GLOBAL-VHUB-AFW-POLICY&quot;</span> <span class="n">-ResourceGroupName</span> <span class="s2">&quot;AZ-GLOBAL-NETWORK-RG01&quot;</span> <span class="p">|</span> <span class="nb">Set-AzFirewall</span>
-</code></pre></div>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Get-AzFirewall</span> <span class="n">-Name</span> <span class="s2">&quot;AZ-GLOBAL-VHUB-AFW-POLICY&quot;</span> <span class="n">-ResourceGroupName</span> <span class="s2">&quot;AZ-GLOBAL-NETWORK-RG01&quot;</span> <span class="p">|</span> <span class="nb">Set-AzFirewall</span>
+</span></code></pre></div>
 <p>In some cases this has to be done several times.</p>
 </div>
 <h3 id="unconfigure-failed-ip-groups-from-firewall-policy">Unconfigure failed IP Groups from Firewall Policy<a class="headerlink" href="#unconfigure-failed-ip-groups-from-firewall-policy" title="Permanent link">&para;</a></h3>

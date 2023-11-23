@@ -42,7 +42,7 @@
   
   
   
-  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 12a10 10 0 0 1-10 10A10 10 0 0 1 2 12 10 10 0 0 1 12 2a10 10 0 0 1 10 10M6 13h8l-3.5 3.5 1.42 1.42L17.84 12l-5.92-5.92L10.5 7.5 14 11H6v2Z"/></svg>');}</style>
+  <style>:root{--md-annotation-icon:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/></svg>');}</style>
 
 
     
@@ -432,11 +432,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../category/how-to/" class="md-nav__link">
+      <a href="../category/troubleshooting/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    how-to
+    troubleshooting
   </span>
   
 
@@ -452,11 +452,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../category/troubleshooting/" class="md-nav__link">
+      <a href="../category/how-to/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    troubleshooting
+    how-to
   </span>
   
 
@@ -754,50 +754,50 @@
 <h2 id="ipsec-on-linux">IPSec on Linux<a class="headerlink" href="#ipsec-on-linux" title="Permanent link">&para;</a></h2>
 <p>There are multiple options for building IPSec tunnels in Linux: e.g. <a href="https://libreswan.org/" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Libreswan</a>, <a href="https://www.strongswan.org/" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Strongswan</a>, <a href="https://openswan.org/" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Openswan</a></p>
 <p>For no particular reason, we will build the site-to-site tunnel with Libreswan<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> in this example.</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libreswan<span class="w"> </span>-y
-</code></pre></div>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ipsec<span class="w"> </span>verify
-
-Verifying<span class="w"> </span>installed<span class="w"> </span>system<span class="w"> </span>and<span class="w"> </span>configuration<span class="w"> </span>files
-
-Version<span class="w"> </span>check<span class="w"> </span>and<span class="w"> </span>ipsec<span class="w"> </span>on-path<span class="w">                     </span><span class="o">[</span>OK<span class="o">]</span>
-Libreswan<span class="w"> </span><span class="m">3</span>.32<span class="w"> </span><span class="o">(</span>netkey<span class="o">)</span><span class="w"> </span>on<span class="w"> </span><span class="m">5</span>.15.0-1034-azure
-Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>IPsec<span class="w"> </span>support<span class="w"> </span><span class="k">in</span><span class="w"> </span>kernel<span class="w">                </span><span class="o">[</span>OK<span class="o">]</span>
-<span class="w"> </span>NETKEY:<span class="w"> </span>Testing<span class="w"> </span>XFRM<span class="w"> </span>related<span class="w"> </span>proc<span class="w"> </span>values
-<span class="w">         </span>ICMP<span class="w"> </span>default/send_redirects<span class="w">                </span><span class="o">[</span>OK<span class="o">]</span>
-<span class="w">         </span>ICMP<span class="w"> </span>default/accept_redirects<span class="w">              </span><span class="o">[</span>OK<span class="o">]</span>
-<span class="w">         </span>XFRM<span class="w"> </span>larval<span class="w"> </span>drop<span class="w">                           </span><span class="o">[</span>OK<span class="o">]</span>
-Pluto<span class="w"> </span>ipsec.conf<span class="w"> </span>syntax<span class="w">                             </span><span class="o">[</span>OK<span class="o">]</span>
-Checking<span class="w"> </span>rp_filter<span class="w">                                  </span><span class="o">[</span>OK<span class="o">]</span>
-Checking<span class="w"> </span>that<span class="w"> </span>pluto<span class="w"> </span>is<span class="w"> </span>running<span class="w">                      </span><span class="o">[</span>OK<span class="o">]</span>
-<span class="w"> </span>Pluto<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE<span class="w"> </span>on<span class="w"> </span>udp<span class="w"> </span><span class="m">500</span><span class="w">                 </span><span class="o">[</span>OK<span class="o">]</span>
-<span class="w"> </span>Pluto<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE/NAT-T<span class="w"> </span>on<span class="w"> </span>udp<span class="w"> </span><span class="m">4500</span><span class="w">          </span><span class="o">[</span>OK<span class="o">]</span>
-<span class="w"> </span>Pluto<span class="w"> </span>ipsec.secret<span class="w"> </span>syntax<span class="w">                          </span><span class="o">[</span>OK<span class="o">]</span>
-Checking<span class="w"> </span><span class="s1">&#39;ip&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w">                               </span><span class="o">[</span>OK<span class="o">]</span>
-Checking<span class="w"> </span><span class="s1">&#39;iptables&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w">                         </span><span class="o">[</span>OK<span class="o">]</span>
-Checking<span class="w"> </span><span class="s1">&#39;prelink&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>interfere<span class="w"> </span>with<span class="w"> </span>FIPS<span class="w"> </span><span class="o">[</span>OK<span class="o">]</span>
-Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>obsolete<span class="w"> </span>ipsec.conf<span class="w"> </span>options<span class="w">            </span><span class="o">[</span>OK<span class="o">]</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libreswan<span class="w"> </span>-y
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>ipsec<span class="w"> </span>verify
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Verifying<span class="w"> </span>installed<span class="w"> </span>system<span class="w"> </span>and<span class="w"> </span>configuration<span class="w"> </span>files
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Version<span class="w"> </span>check<span class="w"> </span>and<span class="w"> </span>ipsec<span class="w"> </span>on-path<span class="w">                     </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Libreswan<span class="w"> </span><span class="m">3</span>.32<span class="w"> </span><span class="o">(</span>netkey<span class="o">)</span><span class="w"> </span>on<span class="w"> </span><span class="m">5</span>.15.0-1034-azure
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>IPsec<span class="w"> </span>support<span class="w"> </span><span class="k">in</span><span class="w"> </span>kernel<span class="w">                </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w"> </span>NETKEY:<span class="w"> </span>Testing<span class="w"> </span>XFRM<span class="w"> </span>related<span class="w"> </span>proc<span class="w"> </span>values
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">         </span>ICMP<span class="w"> </span>default/send_redirects<span class="w">                </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">         </span>ICMP<span class="w"> </span>default/accept_redirects<span class="w">              </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">         </span>XFRM<span class="w"> </span>larval<span class="w"> </span>drop<span class="w">                           </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>Pluto<span class="w"> </span>ipsec.conf<span class="w"> </span>syntax<span class="w">                             </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>Checking<span class="w"> </span>rp_filter<span class="w">                                  </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>Checking<span class="w"> </span>that<span class="w"> </span>pluto<span class="w"> </span>is<span class="w"> </span>running<span class="w">                      </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w"> </span>Pluto<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE<span class="w"> </span>on<span class="w"> </span>udp<span class="w"> </span><span class="m">500</span><span class="w">                 </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w"> </span>Pluto<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE/NAT-T<span class="w"> </span>on<span class="w"> </span>udp<span class="w"> </span><span class="m">4500</span><span class="w">          </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w"> </span>Pluto<span class="w"> </span>ipsec.secret<span class="w"> </span>syntax<span class="w">                          </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>Checking<span class="w"> </span><span class="s1">&#39;ip&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w">                               </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>Checking<span class="w"> </span><span class="s1">&#39;iptables&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w">                         </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>Checking<span class="w"> </span><span class="s1">&#39;prelink&#39;</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>interfere<span class="w"> </span>with<span class="w"> </span>FIPS<span class="w"> </span><span class="o">[</span>OK<span class="o">]</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>Checking<span class="w"> </span><span class="k">for</span><span class="w"> </span>obsolete<span class="w"> </span>ipsec.conf<span class="w"> </span>options<span class="w">            </span><span class="o">[</span>OK<span class="o">]</span>
+</span></code></pre></div>
 <h3 id="linux-sysctl-settings">Linux sysctl Settings<a class="headerlink" href="#linux-sysctl-settings" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># /etc/sysctl.d/99-dnat.conf</span>
-net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
-net.ipv6.conf.all.forwarding<span class="o">=</span><span class="m">1</span>
-net.ipv4.conf.*.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-net.ipv4.conf.*.send_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-net.ipv6.conf.all.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-net.ipv6.conf.default.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
-net.ipv4.ip_local_port_range<span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="m">65535</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># /etc/sysctl.d/99-dnat.conf</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>net.ipv4.ip_forward<span class="o">=</span><span class="m">1</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>net.ipv6.conf.all.forwarding<span class="o">=</span><span class="m">1</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>net.ipv4.conf.*.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>net.ipv4.conf.*.send_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>net.ipv6.conf.all.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>net.ipv6.conf.default.accept_redirects<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>net.ipv4.ip_local_port_range<span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="m">65535</span>
+</span></code></pre></div>
 <p><code>net.ipv4.ip_local_port_range=2048 65535</code> extends the standard SNAT port range (~28000 ports on Ubuntu 22.04) to prevent SNAT port exhaustion<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
 <h3 id="set-psk">Set PSK<a class="headerlink" href="#set-psk" title="Permanent link">&para;</a></h3>
 <p>After that, set the PSK to be used for the tunnel:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># /etc/ipsec.d/zscaler.secrets</span>
-<span class="c1"># to use only one PSK for all connections:</span>
-%any<span class="w"> </span>%any<span class="w"> </span>:<span class="w"> </span>PSK<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sCAkcUwe434DwK4c54qBLw9H8G</span><span class="s2">&quot;</span>
-
-<span class="c1"># to use the PSK for the connection to fra4-vpn.zscaler.net only:</span>
-fra4-vpn.zscaler.net<span class="w"> </span>:<span class="w"> </span>PSK<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sCAkcUwe434DwK4c54qBLw9H8G</span><span class="s2">&quot;</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># /etc/ipsec.d/zscaler.secrets</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># to use only one PSK for all connections:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>%any<span class="w"> </span>%any<span class="w"> </span>:<span class="w"> </span>PSK<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sCAkcUwe434DwK4c54qBLw9H8G</span><span class="s2">&quot;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># to use the PSK for the connection to fra4-vpn.zscaler.net only:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>fra4-vpn.zscaler.net<span class="w"> </span>:<span class="w"> </span>PSK<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sCAkcUwe434DwK4c54qBLw9H8G</span><span class="s2">&quot;</span>
+</span></code></pre></div>
 <h3 id="tunnel-basics">Tunnel Basics<a class="headerlink" href="#tunnel-basics" title="Permanent link">&para;</a></h3>
 <p><a href="https://libreswan.org/man/ipsec.conf.5.html" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Libreswan ipsec.conf settings</a></p>
 <p><a href="https://libreswan.org/wiki/Configuration_examples" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Libreswan configuration examples</a></p>
@@ -817,30 +817,30 @@ fra4-vpn.zscaler.net<span class="w"> </span>:<span class="w"> </span>PSK<span cl
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> You need to manually add routes to route traffic into the tunnel: <code>ip route add 185.46.212.88 dev vti0</code></li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Up/down script advantageous with <code>leftupdown</code> parameter to add/withdraw route according to <code>vti</code> state</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># /etc/ipsec.d/zscaler.conf</span>
-conn<span class="w"> </span>zscaler
-<span class="w">    </span><span class="nv">type</span><span class="o">=</span>tunnel
-<span class="w">    </span><span class="nv">authby</span><span class="o">=</span>secret
-<span class="w">    </span><span class="nv">auto</span><span class="o">=</span>start
-<span class="w">    </span><span class="nv">left</span><span class="o">=</span>%defaultroute
-<span class="w">    </span><span class="nv">leftid</span><span class="o">=</span><span class="m">45</span>.123.234.123
-<span class="hll"><span class="w">    </span><span class="nv">leftsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
-</span><span class="w">    </span><span class="nv">right</span><span class="o">=</span>fra4-vpn.zscaler.net
-<span class="hll"><span class="w">    </span><span class="nv">rightsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
-</span><span class="w">    </span><span class="nv">mark</span><span class="o">=</span><span class="m">5</span>/0xffffffff
-<span class="hll"><span class="w">    </span>vti-interface<span class="o">=</span>vti0
-</span><span class="hll"><span class="w">    </span>vti-routing<span class="o">=</span>no
-</span><span class="w">    </span><span class="nv">ikev2</span><span class="o">=</span>yes
-<span class="w">    </span><span class="nv">ike</span><span class="o">=</span>aes256-sha2_256<span class="p">;</span>dh14
-<span class="w">    </span><span class="nv">ikelifetime</span><span class="o">=</span>86400s
-<span class="w">    </span><span class="nv">dpdaction</span><span class="o">=</span>restart
-<span class="w">    </span><span class="nv">dpdtimeout</span><span class="o">=</span>20s
-<span class="w">    </span><span class="nv">dpddelay</span><span class="o">=</span>25s
-<span class="w">    </span>nat-keepalive<span class="o">=</span>yes
-<span class="w">    </span><span class="nv">phase2</span><span class="o">=</span>esp
-<span class="w">    </span><span class="nv">esp</span><span class="o">=</span>null-md5
-<span class="w">    </span><span class="nv">salifetime</span><span class="o">=</span>28800s
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># /etc/ipsec.d/zscaler.conf</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>conn<span class="w"> </span>zscaler
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nv">type</span><span class="o">=</span>tunnel
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nv">authby</span><span class="o">=</span>secret
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nv">auto</span><span class="o">=</span>start
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nv">left</span><span class="o">=</span>%defaultroute
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nv">leftid</span><span class="o">=</span><span class="m">45</span>.123.234.123
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="hll"><span class="w">    </span><span class="nv">leftsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
+</span></span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nv">right</span><span class="o">=</span>fra4-vpn.zscaler.net
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="hll"><span class="w">    </span><span class="nv">rightsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
+</span></span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="nv">mark</span><span class="o">=</span><span class="m">5</span>/0xffffffff
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="hll"><span class="w">    </span>vti-interface<span class="o">=</span>vti0
+</span></span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="hll"><span class="w">    </span>vti-routing<span class="o">=</span>no
+</span></span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="nv">ikev2</span><span class="o">=</span>yes
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nv">ike</span><span class="o">=</span>aes256-sha2_256<span class="p">;</span>dh14
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nv">ikelifetime</span><span class="o">=</span>86400s
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nv">dpdaction</span><span class="o">=</span>restart
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="nv">dpdtimeout</span><span class="o">=</span>20s
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="nv">dpddelay</span><span class="o">=</span>25s
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">    </span>nat-keepalive<span class="o">=</span>yes
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="nv">phase2</span><span class="o">=</span>esp
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="nv">esp</span><span class="o">=</span>null-md5
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">    </span><span class="nv">salifetime</span><span class="o">=</span>28800s
+</span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>In general, route-based vpn tunnels should be preferred to policy-based vpn tunnels. </p>
@@ -850,140 +850,140 @@ conn<span class="w"> </span>zscaler
 <p>With policy-based VPNs, an IPSec policy is created to route destination <code>185.46.212.88</code> into the tunnel:</p>
 <p>No <code>vti</code> is created, no adding/removing routes in the routing table</p>
 <p>Configuration:</p>
-<p><div class="highlight"><pre><span></span><code><span class="c1"># /etc/ipsec.d/zscaler.conf</span>
-conn<span class="w"> </span>zscaler
-<span class="w">    </span><span class="nv">type</span><span class="o">=</span>tunnel
-<span class="w">    </span><span class="nv">authby</span><span class="o">=</span>secret
-<span class="w">    </span><span class="nv">auto</span><span class="o">=</span>start
-<span class="w">    </span><span class="nv">left</span><span class="o">=</span>%defaultroute
-<span class="w">    </span><span class="nv">leftid</span><span class="o">=</span><span class="m">45</span>.123.234.123
-<span class="hll"><span class="w">    </span><span class="nv">leftsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
-</span><span class="w">    </span><span class="nv">right</span><span class="o">=</span>fra4-vpn.zscaler.net
-<span class="hll"><span class="w">    </span><span class="nv">rightsubnet</span><span class="o">=</span><span class="m">185</span>.46.212.88/32
-</span><span class="w">    </span><span class="nv">mark</span><span class="o">=</span><span class="m">5</span>/0xffffffff
-<span class="w">    </span><span class="nv">ikev2</span><span class="o">=</span>yes
-<span class="w">    </span><span class="nv">ike</span><span class="o">=</span>aes256-sha2_256<span class="p">;</span>dh14
-<span class="w">    </span><span class="nv">ikelifetime</span><span class="o">=</span>86400s
-<span class="w">    </span><span class="nv">dpdaction</span><span class="o">=</span>restart
-<span class="w">    </span><span class="nv">dpdtimeout</span><span class="o">=</span>20s
-<span class="w">    </span><span class="nv">dpddelay</span><span class="o">=</span>25s
-<span class="w">    </span>nat-keepalive<span class="o">=</span>yes
-<span class="w">    </span><span class="nv">phase2</span><span class="o">=</span>esp
-<span class="w">    </span><span class="nv">esp</span><span class="o">=</span>null-md5
-<span class="w">    </span><span class="nv">salifetime</span><span class="o">=</span>28800s
-</code></pre></div>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># /etc/ipsec.d/zscaler.conf</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>conn<span class="w"> </span>zscaler
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nv">type</span><span class="o">=</span>tunnel
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nv">authby</span><span class="o">=</span>secret
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nv">auto</span><span class="o">=</span>start
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nv">left</span><span class="o">=</span>%defaultroute
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nv">leftid</span><span class="o">=</span><span class="m">45</span>.123.234.123
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="hll"><span class="w">    </span><span class="nv">leftsubnet</span><span class="o">=</span><span class="m">0</span>.0.0.0/0
+</span></span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nv">right</span><span class="o">=</span>fra4-vpn.zscaler.net
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="hll"><span class="w">    </span><span class="nv">rightsubnet</span><span class="o">=</span><span class="m">185</span>.46.212.88/32
+</span></span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nv">mark</span><span class="o">=</span><span class="m">5</span>/0xffffffff
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nv">ikev2</span><span class="o">=</span>yes
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="nv">ike</span><span class="o">=</span>aes256-sha2_256<span class="p">;</span>dh14
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nv">ikelifetime</span><span class="o">=</span>86400s
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="nv">dpdaction</span><span class="o">=</span>restart
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nv">dpdtimeout</span><span class="o">=</span>20s
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nv">dpddelay</span><span class="o">=</span>25s
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span>nat-keepalive<span class="o">=</span>yes
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nv">phase2</span><span class="o">=</span>esp
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="nv">esp</span><span class="o">=</span>null-md5
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="nv">salifetime</span><span class="o">=</span>28800s
+</span></code></pre></div>
 Check IPSec policy and state:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># state</span>
-sudo<span class="w"> </span>ip<span class="w"> </span>xfrm<span class="w"> </span>state
-
-src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
-<span class="w">    </span>proto<span class="w"> </span>esp<span class="w"> </span>spi<span class="w"> </span>0x3711f91f<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
-<span class="w">    </span>replay-window<span class="w"> </span><span class="m">32</span><span class="w"> </span>flag<span class="w"> </span>af-unspec
-<span class="w">    </span>auth-trunc<span class="w"> </span>hmac<span class="o">(</span>md5<span class="o">)</span><span class="w"> </span>0x3b2c9faf94007bc1efc94ca796b37d37<span class="w"> </span><span class="m">96</span>
-<span class="w">    </span>enc<span class="w"> </span>ecb<span class="o">(</span>cipher_null<span class="o">)</span>
-<span class="w">    </span>encap<span class="w"> </span><span class="nb">type</span><span class="w"> </span>espinudp<span class="w"> </span>sport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>dport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>addr<span class="w"> </span><span class="m">0</span>.0.0.0
-<span class="w">    </span>anti-replay<span class="w"> </span>context:<span class="w"> </span>seq<span class="w"> </span>0x3,<span class="w"> </span>oseq<span class="w"> </span>0x0,<span class="w"> </span>bitmap<span class="w"> </span>0x00000007
-src<span class="w"> </span><span class="m">10</span>.4.1.4<span class="w"> </span>dst<span class="w"> </span><span class="m">165</span>.225.112.12
-<span class="w">    </span>proto<span class="w"> </span>esp<span class="w"> </span>spi<span class="w"> </span>0x5f1e1fd1<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
-<span class="w">    </span>replay-window<span class="w"> </span><span class="m">32</span><span class="w"> </span>flag<span class="w"> </span>af-unspec
-<span class="w">    </span>auth-trunc<span class="w"> </span>hmac<span class="o">(</span>md5<span class="o">)</span><span class="w"> </span>0x18bd5dd32c12a72a4c2f5288ab287fe0<span class="w"> </span><span class="m">96</span>
-<span class="w">    </span>enc<span class="w"> </span>ecb<span class="o">(</span>cipher_null<span class="o">)</span>
-<span class="w">    </span>encap<span class="w"> </span><span class="nb">type</span><span class="w"> </span>espinudp<span class="w"> </span>sport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>dport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>addr<span class="w"> </span><span class="m">0</span>.0.0.0
-<span class="w">    </span>anti-replay<span class="w"> </span>context:<span class="w"> </span>seq<span class="w"> </span>0x0,<span class="w"> </span>oseq<span class="w"> </span>0x3,<span class="w"> </span>bitmap<span class="w"> </span>0x00000000
-
-<span class="c1"># policy</span>
-sudo<span class="w"> </span>ip<span class="w"> </span>xfrm<span class="w"> </span>pol
-
-src<span class="w"> </span><span class="m">0</span>.0.0.0/0<span class="w"> </span>dst<span class="w"> </span><span class="m">185</span>.46.212.88/32
-<span class="w">    </span>dir<span class="w"> </span>out<span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
-<span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">10</span>.4.1.4<span class="w"> </span>dst<span class="w"> </span><span class="m">165</span>.225.112.12
-<span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
-src<span class="w"> </span><span class="m">185</span>.46.212.88/32<span class="w"> </span>dst<span class="w"> </span><span class="m">0</span>.0.0.0/0
-<span class="w">    </span>dir<span class="w"> </span>fwd<span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
-<span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
-<span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
-src<span class="w"> </span><span class="m">185</span>.46.212.88/32<span class="w"> </span>dst<span class="w"> </span><span class="m">0</span>.0.0.0/0
-<span class="w">    </span>dir<span class="w"> </span><span class="k">in</span><span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
-<span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
-<span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
-&lt;...&gt;
-</code></pre></div>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># state</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>ip<span class="w"> </span>xfrm<span class="w"> </span>state
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span>proto<span class="w"> </span>esp<span class="w"> </span>spi<span class="w"> </span>0x3711f91f<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span>replay-window<span class="w"> </span><span class="m">32</span><span class="w"> </span>flag<span class="w"> </span>af-unspec
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span>auth-trunc<span class="w"> </span>hmac<span class="o">(</span>md5<span class="o">)</span><span class="w"> </span>0x3b2c9faf94007bc1efc94ca796b37d37<span class="w"> </span><span class="m">96</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span>enc<span class="w"> </span>ecb<span class="o">(</span>cipher_null<span class="o">)</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span>encap<span class="w"> </span><span class="nb">type</span><span class="w"> </span>espinudp<span class="w"> </span>sport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>dport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>addr<span class="w"> </span><span class="m">0</span>.0.0.0
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span>anti-replay<span class="w"> </span>context:<span class="w"> </span>seq<span class="w"> </span>0x3,<span class="w"> </span>oseq<span class="w"> </span>0x0,<span class="w"> </span>bitmap<span class="w"> </span>0x00000007
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>src<span class="w"> </span><span class="m">10</span>.4.1.4<span class="w"> </span>dst<span class="w"> </span><span class="m">165</span>.225.112.12
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span>proto<span class="w"> </span>esp<span class="w"> </span>spi<span class="w"> </span>0x5f1e1fd1<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span>replay-window<span class="w"> </span><span class="m">32</span><span class="w"> </span>flag<span class="w"> </span>af-unspec
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span>auth-trunc<span class="w"> </span>hmac<span class="o">(</span>md5<span class="o">)</span><span class="w"> </span>0x18bd5dd32c12a72a4c2f5288ab287fe0<span class="w"> </span><span class="m">96</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span>enc<span class="w"> </span>ecb<span class="o">(</span>cipher_null<span class="o">)</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span>encap<span class="w"> </span><span class="nb">type</span><span class="w"> </span>espinudp<span class="w"> </span>sport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>dport<span class="w"> </span><span class="m">4500</span><span class="w"> </span>addr<span class="w"> </span><span class="m">0</span>.0.0.0
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span>anti-replay<span class="w"> </span>context:<span class="w"> </span>seq<span class="w"> </span>0x0,<span class="w"> </span>oseq<span class="w"> </span>0x3,<span class="w"> </span>bitmap<span class="w"> </span>0x00000000
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="c1"># policy</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>sudo<span class="w"> </span>ip<span class="w"> </span>xfrm<span class="w"> </span>pol
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>src<span class="w"> </span><span class="m">0</span>.0.0.0/0<span class="w"> </span>dst<span class="w"> </span><span class="m">185</span>.46.212.88/32
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">    </span>dir<span class="w"> </span>out<span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">10</span>.4.1.4<span class="w"> </span>dst<span class="w"> </span><span class="m">165</span>.225.112.12
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>src<span class="w"> </span><span class="m">185</span>.46.212.88/32<span class="w"> </span>dst<span class="w"> </span><span class="m">0</span>.0.0.0/0
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">    </span>dir<span class="w"> </span>fwd<span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>src<span class="w"> </span><span class="m">185</span>.46.212.88/32<span class="w"> </span>dst<span class="w"> </span><span class="m">0</span>.0.0.0/0
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w">    </span>dir<span class="w"> </span><span class="k">in</span><span class="w"> </span>priority<span class="w"> </span><span class="m">2097086</span>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">    </span>tmpl<span class="w"> </span>src<span class="w"> </span><span class="m">165</span>.225.112.12<span class="w"> </span>dst<span class="w"> </span><span class="m">10</span>.4.1.4
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="w">        </span>proto<span class="w"> </span>esp<span class="w"> </span>reqid<span class="w"> </span><span class="m">16389</span><span class="w"> </span>mode<span class="w"> </span>tunnel
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>&lt;...&gt;
+</span></code></pre></div>
 <h3 id="enable-the-tunnel">Enable the Tunnel<a class="headerlink" href="#enable-the-tunnel" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># enable and start service</span>
-sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ipsec.service
-
-sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>ipsec.service
-
-<span class="c1"># tail -f service logs</span>
-journalctl<span class="w"> </span>-u<span class="w"> </span>ipsec<span class="w"> </span>-f
-
-<span class="c1"># successful conneciton</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE<span class="w"> </span>messages
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>Kernel<span class="w"> </span>supports<span class="w"> </span>NIC<span class="w"> </span>esp-hw-offload
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>eth0/eth0<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="m">10</span>.
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>eth0/eth0<span class="w"> </span><span class="m">10</span>.4.1.4:4500
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="m">127</span>.0.
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="m">127</span>.0.0.1:4500
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>loading<span class="w"> </span>secrets<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;/etc/ipsec.secrets&quot;</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>loading<span class="w"> </span>secrets<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;/etc/ipsec.d/zscaler.secrets&quot;</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#1: initiating IKEv2 IKE SA</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w"> </span><span class="nb">local</span><span class="w"> </span>IKE<span class="w"> </span>proposals<span class="w"> </span><span class="o">(</span>IKE<span class="w"> </span>SA<span class="w"> </span>initiator<span class="w"> </span>selecting<span class="w"> </span>KE<span class="o">)</span>:
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w">   </span><span class="m">1</span>:IKE<span class="o">=</span>AES_CBC_256-HMAC_SHA2_256-HMAC_SHA2_256_128-MODP2048
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#1: STATE_PARENT_I1: sent v2I1, expected v2R1</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w"> </span><span class="nb">local</span><span class="w"> </span>ESP/AH<span class="w"> </span>proposals<span class="w"> </span><span class="o">(</span>IKE<span class="w"> </span>SA<span class="w"> </span>initiator<span class="w"> </span>emitting<span class="w"> </span>ESP/AH<span class="w"> </span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w">   </span><span class="m">1</span>:ESP<span class="o">=</span>NULL-HMAC_MD5_96-NONE-DISABLED
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: STATE_PARENT_I2: sent v2I2, expected v2R2 {auth=IKEv2 8 prf=HMAC_SHA2_256 group=MODP2048}</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: IKEv2 mode peer ID is ID_IPV4_ADDR: &#39;165.225.112.12&#39;</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: Authenticated using authby=secret</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: negotiated connection [0.0.0.0-255.255.255.255:0-65535 5 0]</span>
-pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: STATE_V2_IPSEC_I: IPsec SA established tunnel mode {ESP/NAT=&gt;0x6d394066 &lt;0xb319ec97 xfrm=NULL-HMAC_MD5_96 NATOA=none NATD=165.225.112.12:4500 DPD=active}</span>
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># enable and start service</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ipsec.service
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>ipsec.service
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1"># tail -f service logs</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>ipsec<span class="w"> </span>-f
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># successful conneciton</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>listening<span class="w"> </span><span class="k">for</span><span class="w"> </span>IKE<span class="w"> </span>messages
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>Kernel<span class="w"> </span>supports<span class="w"> </span>NIC<span class="w"> </span>esp-hw-offload
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>eth0/eth0<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="m">10</span>.
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>eth0/eth0<span class="w"> </span><span class="m">10</span>.4.1.4:4500
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="m">127</span>.0.
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="m">127</span>.0.0.1:4500
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>adding<span class="w"> </span>interface<span class="w"> </span>lo/lo<span class="w"> </span><span class="o">(</span>esp-hw-offload<span class="w"> </span>not<span class="w"> </span>supported<span class="w"> </span>by<span class="w"> </span>kernel<span class="o">)</span><span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>loading<span class="w"> </span>secrets<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;/etc/ipsec.secrets&quot;</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span>loading<span class="w"> </span>secrets<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;/etc/ipsec.d/zscaler.secrets&quot;</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#1: initiating IKEv2 IKE SA</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w"> </span><span class="nb">local</span><span class="w"> </span>IKE<span class="w"> </span>proposals<span class="w"> </span><span class="o">(</span>IKE<span class="w"> </span>SA<span class="w"> </span>initiator<span class="w"> </span>selecting<span class="w"> </span>KE<span class="o">)</span>:
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w">   </span><span class="m">1</span>:IKE<span class="o">=</span>AES_CBC_256-HMAC_SHA2_256-HMAC_SHA2_256_128-MODP2048
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#1: STATE_PARENT_I1: sent v2I1, expected v2R1</span>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w"> </span><span class="nb">local</span><span class="w"> </span>ESP/AH<span class="w"> </span>proposals<span class="w"> </span><span class="o">(</span>IKE<span class="w"> </span>SA<span class="w"> </span>initiator<span class="w"> </span>emitting<span class="w"> </span>ESP/AH<span class="w"> </span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span>:<span class="w">   </span><span class="m">1</span>:ESP<span class="o">=</span>NULL-HMAC_MD5_96-NONE-DISABLED
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: STATE_PARENT_I2: sent v2I2, expected v2R2 {auth=IKEv2 8 prf=HMAC_SHA2_256 group=MODP2048}</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: IKEv2 mode peer ID is ID_IPV4_ADDR: &#39;165.225.112.12&#39;</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: Authenticated using authby=secret</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: negotiated connection [0.0.0.0-255.255.255.255:0-65535 5 0]</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a>pluto<span class="o">[</span><span class="m">1297</span><span class="o">]</span>:<span class="w"> </span><span class="s2">&quot;zscaler&quot;</span><span class="w"> </span><span class="c1">#2: STATE_V2_IPSEC_I: IPsec SA established tunnel mode {ESP/NAT=&gt;0x6d394066 &lt;0xb319ec97 xfrm=NULL-HMAC_MD5_96 NATOA=none NATD=165.225.112.12:4500 DPD=active}</span>
+</span></code></pre></div>
 <h3 id="troubleshooting-ipsec-tunnels">Troubleshooting IPSec Tunnels<a class="headerlink" href="#troubleshooting-ipsec-tunnels" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>ipsec<span class="w"> </span>
-
-sudo<span class="w"> </span>ipsec<span class="w"> </span>whack<span class="w"> </span>--status
-sudo<span class="w"> </span>ipsec<span class="w"> </span>whack<span class="w"> </span>--trafficstatus
-
-sudo<span class="w"> </span>ip<span class="w"> </span>tunnel<span class="w"> </span>show
-
-
-<span class="c1"># capture IPSec traffic only</span>
-sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>eth0<span class="w"> </span>esp<span class="w"> </span>or<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">500</span><span class="w"> </span>or<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">4500</span>
-
-<span class="c1"># capture vti traffic (route-based)</span>
-sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>vti0
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>journalctl<span class="w"> </span>-u<span class="w"> </span>ipsec<span class="w"> </span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>sudo<span class="w"> </span>ipsec<span class="w"> </span>whack<span class="w"> </span>--status
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>sudo<span class="w"> </span>ipsec<span class="w"> </span>whack<span class="w"> </span>--trafficstatus
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>sudo<span class="w"> </span>ip<span class="w"> </span>tunnel<span class="w"> </span>show
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1"># capture IPSec traffic only</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>eth0<span class="w"> </span>esp<span class="w"> </span>or<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">500</span><span class="w"> </span>or<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">4500</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1"># capture vti traffic (route-based)</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>sudo<span class="w"> </span>tcpdump<span class="w"> </span>-ni<span class="w"> </span>vti0
+</span></code></pre></div>
 <h2 id="dnatsnat">DNAT/SNAT<a class="headerlink" href="#dnatsnat" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>--dport<span class="w"> </span><span class="m">10101</span><span class="w"> </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">185</span>.46.212.88:10101
-sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-d<span class="w"> </span><span class="m">185</span>.46.212.88<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
-
-<span class="c1"># make iptables rules persistent</span>
-<span class="c1"># non-interactive mode, saves currently applied rules</span>
-<span class="nb">echo</span><span class="w"> </span>iptables-persistent<span class="w"> </span>iptables-persistent/autosave_v4<span class="w"> </span>boolean<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>debconf-set-selections
-<span class="nb">echo</span><span class="w"> </span>iptables-persistent<span class="w"> </span>iptables-persistent/autosave_v6<span class="w"> </span>boolean<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>debconf-set-selections
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>iptables-persistent<span class="w"> </span>-y
-
-<span class="c1"># list iptables rules of the NAT table:</span>
-sudo<span class="w"> </span>iptables<span class="w"> </span>-nvL<span class="w"> </span>-t<span class="w"> </span>nat
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>PREROUTING<span class="w"> </span>-p<span class="w"> </span>tcp<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span>--dport<span class="w"> </span><span class="m">10101</span><span class="w"> </span>-j<span class="w"> </span>DNAT<span class="w"> </span>--to-destination<span class="w"> </span><span class="m">185</span>.46.212.88:10101
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-t<span class="w"> </span>nat<span class="w"> </span>-A<span class="w"> </span>POSTROUTING<span class="w"> </span>-d<span class="w"> </span><span class="m">185</span>.46.212.88<span class="w"> </span>-j<span class="w"> </span>MASQUERADE
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># make iptables rules persistent</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="c1"># non-interactive mode, saves currently applied rules</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nb">echo</span><span class="w"> </span>iptables-persistent<span class="w"> </span>iptables-persistent/autosave_v4<span class="w"> </span>boolean<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>debconf-set-selections
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nb">echo</span><span class="w"> </span>iptables-persistent<span class="w"> </span>iptables-persistent/autosave_v6<span class="w"> </span>boolean<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>debconf-set-selections
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>iptables-persistent<span class="w"> </span>-y
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1"># list iptables rules of the NAT table:</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>sudo<span class="w"> </span>iptables<span class="w"> </span>-nvL<span class="w"> </span>-t<span class="w"> </span>nat
+</span></code></pre></div>
 <p>The following happens here (example for route-based VPN):</p>
 <p>Incoming packet on <code>eth0</code> - <code>10.4.1.4</code> on port <code>10101</code> (internal PAC file <code>return "PROXY 10.4.1.4:10101"</code> statement)</p>
-<div class="highlight"><pre><span></span><code>source: 10.8.0.4:56780
-destination: 10.4.1.4:10101 (eth0)
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>source: 10.8.0.4:56780
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>destination: 10.4.1.4:10101 (eth0)
+</span></code></pre></div>
 <p>First <code>iptables</code> rule changes the destination to the remote tunnel IP (DNAT, <code>PREROUTING</code> chain)</p>
-<div class="highlight"><pre><span></span><code>source: 10.8.0.4:56780
-destination: 185.46.212.88:10101 (remote VPN side)
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>source: 10.8.0.4:56780
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>destination: 185.46.212.88:10101 (remote VPN side)
+</span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Forwarding decision is taken here -&gt; destination interface is <code>vti0</code> according to the routing table (that's why we need to set the route)</p>
 </div>
 <p>Second rule masquerades (SNATs, <code>POSTROUTING</code> chain) the packet behind the local interface (<code>eth0</code>) IP</p>
-<div class="highlight"><pre><span></span><code>source: 10.4.1.4:43210 (eth0)
-destination: 185.46.212.88:10101 (remote VPN side)
-</code></pre></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>source: 10.4.1.4:43210 (eth0)
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>destination: 185.46.212.88:10101 (remote VPN side)
+</span></code></pre></div>
 <p>Forward the packet into the VPN tunnel (out <code>vti0</code> interface)</p>
 <p>Conntrack<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> will keep track of the mapping of original and translated source/destination <code>IP:port</code> tuples</p>
 <div class="admonition note">
@@ -999,13 +999,13 @@ destination: 185.46.212.88:10101 (remote VPN side)
 <p>As a bonus, Netdata can natively monitor Libreswan tunnels uptime and bytes in/out</p>
 <p><a href="https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels</a></p>
 <p>Add the netdata user to <code>/etc/sudoers.d/</code> to allow monitoring commands:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># /etc/sudoers.d/netdata</span>
-netdata<span class="w"> </span><span class="nv">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/sbin/ipsec<span class="w"> </span>whack<span class="w"> </span>--status
-netdata<span class="w"> </span><span class="nv">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/sbin/ipsec<span class="w"> </span>whack<span class="w"> </span>--trafficstatus
-
-<span class="c1"># chmod the file</span>
-sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>etc/sudoers.d/netdata
-</code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># /etc/sudoers.d/netdata</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>netdata<span class="w"> </span><span class="nv">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/sbin/ipsec<span class="w"> </span>whack<span class="w"> </span>--status
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>netdata<span class="w"> </span><span class="nv">ALL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>root<span class="o">)</span><span class="w"> </span>NOPASSWD:<span class="w"> </span>/sbin/ipsec<span class="w"> </span>whack<span class="w"> </span>--trafficstatus
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1"># chmod the file</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>etc/sudoers.d/netdata
+</span></code></pre></div>
 <h2 id="costs">Costs<a class="headerlink" href="#costs" title="Permanent link">&para;</a></h2>
 <div class="admonition example">
 <p class="admonition-title">Example Costs</p>
