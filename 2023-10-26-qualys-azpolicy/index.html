@@ -92,7 +92,18 @@
       
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -1054,9 +1065,9 @@
 <ol>
 <li>Create the assignment and set scope</li>
 <li>Specify required parameters
-<img alt="assignment1" src="../assets/qualys-azpolicy/assignment1.png" /></li>
+<a class="glightbox" href="../assets/qualys-azpolicy/assignment1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="assignment1" loading="lazy" src="../assets/qualys-azpolicy/assignment1.png" /></a></li>
 <li>Specify managed identity, don't create a remediation task yet
-<img alt="assignment2" src="../assets/qualys-azpolicy/assignment2.png" /></li>
+<a class="glightbox" href="../assets/qualys-azpolicy/assignment2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="assignment2" loading="lazy" src="../assets/qualys-azpolicy/assignment2.png" /></a></li>
 </ol>
 <h3 id="managed-identity-and-rbac">Managed Identity and RBAC<a class="headerlink" href="#managed-identity-and-rbac" title="Permanent link">&para;</a></h3>
 <p><code>DeployIfNotExists</code> policies require a managed identity to be created. The managed identity is assigned the permissions defined in the <code>roleDefinitionIds</code> property.</p>
@@ -1075,34 +1086,34 @@
 <ol>
 <li>
 <p>To remediate existing resources, create a remediation task. Choose the policy assignment to remediate:
-<img alt="remed1" src="../assets/qualys-azpolicy/remed1.png" /></p>
+<a class="glightbox" href="../assets/qualys-azpolicy/remed1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="remed1" loading="lazy" src="../assets/qualys-azpolicy/remed1.png" /></a></p>
 </li>
 <li>
 <p>The task should show the resources that need remediation on the bottom, if the evaluation has not happened, check the <code>Re-evaluate resource compliance before remediating</code>. The remediation task with re-evaluation enabled takes about ~15-30min longer to complete
-<img alt="remed2" src="../assets/qualys-azpolicy/remed2.png" /></p>
+<a class="glightbox" href="../assets/qualys-azpolicy/remed2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="remed2" loading="lazy" src="../assets/qualys-azpolicy/remed2.png" /></a></p>
 </li>
 <li>
 <p>When the task is completed, it shows succeeded and failed resources
-<img alt="remed3" src="../assets/qualys-azpolicy/remed3.png" /></p>
+<a class="glightbox" href="../assets/qualys-azpolicy/remed3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="remed3" loading="lazy" src="../assets/qualys-azpolicy/remed3.png" /></a></p>
 </li>
 </ol>
 <h2 id="deployment-success">Deployment Success<a class="headerlink" href="#deployment-success" title="Permanent link">&para;</a></h2>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Extension status is <code>Provisioning Succeeded</code>:</li>
 </ul>
-<p><img alt="depl2" src="../assets/qualys-azpolicy/depl2.png" /></p>
+<p><a class="glightbox" href="../assets/qualys-azpolicy/depl2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="depl2" loading="lazy" src="../assets/qualys-azpolicy/depl2.png" /></a></p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Server is visible in the Qualys Portal:</li>
 </ul>
-<p><img alt="depl1" src="../assets/qualys-azpolicy/depl1.png" /></p>
+<p><a class="glightbox" href="../assets/qualys-azpolicy/depl1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="depl1" loading="lazy" src="../assets/qualys-azpolicy/depl1.png" /></a></p>
 <h2 id="troubleshooting-deployment-errors">Troubleshooting Deployment Errors<a class="headerlink" href="#troubleshooting-deployment-errors" title="Permanent link">&para;</a></h2>
 <p>Deployment errors are displayed in the remediation task. In the example below, <code>Rocky Linux</code> is not supported by the agent. Besides not supported OS versions, VMs that are powered off will fail.</p>
 <p>If encountering problems with the agent, you might want to take a look at the <a href="#agent-logs">agent logs</a></p>
 <details class="example">
 <summary>Example: Rocky Linux not supported</summary>
-<p><img alt="remed4" src="../assets/qualys-azpolicy/remed4.png" /></p>
+<p><a class="glightbox" href="../assets/qualys-azpolicy/remed4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="remed4" loading="lazy" src="../assets/qualys-azpolicy/remed4.png" /></a></p>
 <p>Checking the install script mentioned in the error message shows the following regex:</p>
-<p><img alt="remed5" src="../assets/qualys-azpolicy/remed5.png" /></p>
+<p><a class="glightbox" href="../assets/qualys-azpolicy/remed5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="remed5" loading="lazy" src="../assets/qualys-azpolicy/remed5.png" /></a></p>
 <p>The install script (<code>/var/lib/waagent/Qualys.QualysAgentLinux-1.6.1.4/bin/avme_install.sh</code>) will check for <code>/etc/redhat-release</code> and match to a regex. This regex does currently not include <code>Rocky Linux</code>. The problem will be fixed in December 2023 according to Qualys</p>
 </details>
 <h2 id="deploy-extension-with-azcli">Deploy extension with AzCLI<a class="headerlink" href="#deploy-extension-with-azcli" title="Permanent link">&para;</a></h2>
@@ -1292,5 +1303,5 @@
       <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

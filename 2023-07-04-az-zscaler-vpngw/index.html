@@ -90,7 +90,18 @@
       
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -748,7 +759,7 @@
 <li>VPN Credentials</li>
 <li>Location (static IPs and VPN credentials need to be referenced here)</li>
 </ul>
-<p><img alt="loc" src="../assets/zsc-vpngw/zscaler-location.png" /></p>
+<p><a class="glightbox" href="../assets/zsc-vpngw/zscaler-location.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="loc" loading="lazy" src="../assets/zsc-vpngw/zscaler-location.png" /></a></p>
 <h2 id="default-route-environment">Default Route Environment<a class="headerlink" href="#default-route-environment" title="Permanent link">&para;</a></h2>
 <p>You cannot configure <code>0.0.0.0/0</code> on the local network gateway, but the default route range can be divided into two prefixes that work: <code>0.0.0.0/1</code>, <code>128.0.0.0/1</code>. This will also be preferred over the system route for <code>0.0.0.0/0</code> to the internet because it's more specific. All traffic will be forwarded to the VPN Gateway</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>az<span class="w"> </span>network<span class="w"> </span>nic<span class="w"> </span>show-effective-route-table<span class="w"> </span>-n<span class="w"> </span>nic-vm-sp<span class="w"> </span>-g<span class="w"> </span>rg-zsc-vpngw<span class="w"> </span>-o<span class="w"> </span>table
@@ -823,7 +834,7 @@
 </span></code></pre></div>
 <p>The config file will enable IP forwarding, set the <code>iptables</code>rules and make those persistent across reboots. Also, <a href="https://github.com/netdata/netdata" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> Netdata</a> will be installed for monitoring and is available at: <code>http://&lt;VMIP&gt;:19999</code></p>
 <p>IP forwarding also needs to be enabled on the network interface resource in Azure:</p>
-<p><img alt="ipfwd" src="../assets/zsc-vpngw/ipfwd.png" /></p>
+<p><a class="glightbox" href="../assets/zsc-vpngw/ipfwd.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ipfwd" loading="lazy" src="../assets/zsc-vpngw/ipfwd.png" /></a></p>
 <h4 id="nva-as-vmss">NVA as VMSS<a class="headerlink" href="#nva-as-vmss" title="Permanent link">&para;</a></h4>
 <p>The Linux NVA can also be deployed as a VMSS, with that we can achieve scalability (manual or autoscaling) and resiliency by placing instances in different AZs (see: <a href="https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L84" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> vmss.bicep#zones</a>). For load balancing the VMSS, Azure Load Balancer will be used (see: <a href="https://github.com/joxz/lab-az/blob/main/vpngw-zscaler/vmss.bicep#L8" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> vmss.bicep#ilb resource</a>)</p>
 <div class="admonition note">
@@ -834,11 +845,11 @@
 <ul>
 <li>On spoke VM add the NVA IP as a proxy server:</li>
 </ul>
-<p><img alt="pac" src="../assets/zsc-vpngw/pac.png" /></p>
+<p><a class="glightbox" href="../assets/zsc-vpngw/pac.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="pac" loading="lazy" src="../assets/zsc-vpngw/pac.png" /></a></p>
 <ul>
 <li>Check connectivity at <code>http://ip.zscaler.com</code>:</li>
 </ul>
-<p><img alt="ipzscaler" src="../assets/zsc-vpngw/ip-zscaler-com.png" /></p>
+<p><a class="glightbox" href="../assets/zsc-vpngw/ip-zscaler-com.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ipzscaler" loading="lazy" src="../assets/zsc-vpngw/ip-zscaler-com.png" /></a></p>
 <p>A packet capture on the NVA confirms the NAT is working:</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>jo@vm-gwsn:~$<span class="w"> </span>tcpdump<span class="w"> </span>-i<span class="w"> </span>eth0<span class="w"> </span><span class="s1">&#39;port 10101&#39;</span><span class="w"> </span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
@@ -993,5 +1004,5 @@
       <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

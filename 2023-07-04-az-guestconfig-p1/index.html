@@ -92,7 +92,18 @@
       
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -874,7 +885,7 @@
 <details class="tip" open="open">
 <summary>Tip</summary>
 <p>To get rid of the <code>constrainedLanguage</code> vscode error in the dev container, import DSC with <code>import-module PSDesiredStateConfiguration</code> in the container terminal.</p>
-<p><img alt="policy" src="../assets/guestconfig/languageconstraints.png" /></p>
+<p><a class="glightbox" href="../assets/guestconfig/languageconstraints.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="policy" loading="lazy" src="../assets/guestconfig/languageconstraints.png" /></a></p>
 </details>
 <h3 id="guest-configuration-package-building">Guest Configuration Package Building<a class="headerlink" href="#guest-configuration-package-building" title="Permanent link">&para;</a></h3>
 <p>Resolve dependencies first: </p>
@@ -1048,5 +1059,5 @@
       <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

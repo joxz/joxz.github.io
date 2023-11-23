@@ -92,7 +92,18 @@
       
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -719,9 +730,9 @@
     end</code></pre>
 <h2 id="problem-description">Problem Description<a class="headerlink" href="#problem-description" title="Permanent link">&para;</a></h2>
 <p>When updating an IP Group with additional IP addresses, it somehow failed:</p>
-<p><img alt="ipgr1" src="../assets/ipgroup-azfw/ipgr1.png" /></p>
+<p><a class="glightbox" href="../assets/ipgroup-azfw/ipgr1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ipgr1" loading="lazy" src="../assets/ipgroup-azfw/ipgr1.png" /></a></p>
 <p><code>AZ-GLOBAL-VHUB-AFW-POLICY</code> is the parent policy and utilizes IP Groups in 'Failed' state and is not modifyable anymore. Updates to rule collections fail with the error message: <code>Put on Firewall Policy AZ-GLOBAL-VHUB-AFW-POLICY Failed with 1 faulted referenced firewalls</code></p>
-<p><img alt="global-failed" src="../assets/ipgroup-azfw/global_failed.png" /></p>
+<p><a class="glightbox" href="../assets/ipgroup-azfw/global_failed.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="global-failed" loading="lazy" src="../assets/ipgroup-azfw/global_failed.png" /></a></p>
 <p>List of all IP Groups:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>➜ az network ip-group list -o table
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -767,7 +778,7 @@
 <h3 id="disconnect-parent-policy-from-child-policy-associated-with-the-failed-azfw-resource">Disconnect parent policy from child policy associated with the failed AzFW resource<a class="headerlink" href="#disconnect-parent-policy-from-child-policy-associated-with-the-failed-azfw-resource" title="Permanent link">&para;</a></h3>
 <p>In our case, <code>AzureFirewall_NEUR-VHUB01</code> was the affected AzFW resource. </p>
 <p><code>AZ-GLOBAL-VHUB-AFW-POLICY</code> was disconnected from <code>AZ-NEUR-VHUB-AFW-POLICY</code> as the parent policy</p>
-<p><img alt="pol1" src="../assets/ipgroup-azfw/pol1.png" /></p>
+<p><a class="glightbox" href="../assets/ipgroup-azfw/pol1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="pol1" loading="lazy" src="../assets/ipgroup-azfw/pol1.png" /></a></p>
 <div class="admonition danger">
 <p class="admonition-title">Important</p>
 <p>The parent policy should now be modifyable again (Succeeded state)</p>
@@ -779,11 +790,11 @@
 <h3 id="unconfigure-failed-ip-groups-from-firewall-policy">Unconfigure failed IP Groups from Firewall Policy<a class="headerlink" href="#unconfigure-failed-ip-groups-from-firewall-policy" title="Permanent link">&para;</a></h3>
 <p>To remove the problematic IP Groups from the policy, IP Groups were replaced with the respective IP addresses/prefixes.</p>
 <p>This was successful, the failed IP Groups were not used anymore and the parent policy went into 'Succeeded' state</p>
-<p><img alt="pol2" src="../assets/ipgroup-azfw/pol2.png" /></p>
+<p><a class="glightbox" href="../assets/ipgroup-azfw/pol2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="pol2" loading="lazy" src="../assets/ipgroup-azfw/pol2.png" /></a></p>
 <p>All resources - parent policy, child policy and firewall - should be in 'Succeeded' state by now</p>
 <h3 id="connect-parent-and-child-policy">Connect parent and child policy<a class="headerlink" href="#connect-parent-and-child-policy" title="Permanent link">&para;</a></h3>
 <p>The parent policy can now be associated to the child policy again</p>
-<p><img alt="pol3" src="../assets/ipgroup-azfw/pol3.png" /></p>
+<p><a class="glightbox" href="../assets/ipgroup-azfw/pol3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="pol3" loading="lazy" src="../assets/ipgroup-azfw/pol3.png" /></a></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>When re-connecting parent and child policy, different policy settings for TLS Inspection, IDPS, Threat Intelligence, DNS Proxy can cause the operation to fail. In this case, disconnect policies again, adjust settings, try again. I have not found an indicator or error message that could point me into the right direction to locate the problem here - I got it working through trial and error.</p>
@@ -908,5 +919,5 @@
       <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

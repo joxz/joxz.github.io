@@ -92,7 +92,18 @@
       
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -740,7 +751,7 @@
 <!-- more -->
 
 <h2 id="target-setup">Target Setup<a class="headerlink" href="#target-setup" title="Permanent link">&para;</a></h2>
-<p><img alt="ipsec" src="../assets/zsc-ipsec/ipsec-setup.png" /></p>
+<p><a class="glightbox" href="../assets/zsc-ipsec/ipsec-setup.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ipsec" loading="lazy" src="../assets/zsc-ipsec/ipsec-setup.png" /></a></p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Necessary Azure resources: RG, Vnet, Subnet,...</li>
@@ -994,7 +1005,7 @@ Check IPSec policy and state:</p>
 <p>We can only use an internal Azure load balancer, and each VM needs its own public IP. </p>
 <p>In this setup, each server builds its own tunnels to Zscaler, and the load balancer distributes load from clients to the backend VMs. Both servers and the public IP resources should be allocated in different Availability Zones.</p>
 <p>On the ILB, set up a load balancing rule for TCP port <code>10101</code> to the backend VMs. Return the ILB frontend IP in the PAC file statement for the clients. Azure Load balancer will never SNAT, so client IPs are visible on the backend VMs (e.g. for <code>tcpdump</code> to capture)</p>
-<p><img alt="ipsec-ha" src="../assets/zsc-ipsec/ipsec-lb.png" /></p>
+<p><a class="glightbox" href="../assets/zsc-ipsec/ipsec-lb.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ipsec-ha" loading="lazy" src="../assets/zsc-ipsec/ipsec-lb.png" /></a></p>
 <h2 id="netdata-libreswan-monitoring">Netdata Libreswan Monitoring<a class="headerlink" href="#netdata-libreswan-monitoring" title="Permanent link">&para;</a></h2>
 <p>As a bonus, Netdata can natively monitor Libreswan tunnels uptime and bytes in/out</p>
 <p><a href="https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels" target="_blank"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"/></svg></span> https://learn.netdata.cloud/docs/data-collection/monitor-anything/Networking/Libreswan-IPSec-tunnels</a></p>
@@ -1145,5 +1156,5 @@ Check IPSec policy and state:</p>
       <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>
