@@ -23,7 +23,7 @@ Another option would be to use the Linux server to do the DNAT and IPSec tunnel,
 
 ## Target Setup
 
-![ipsec](../assets/zsc-ipsec/ipsec-setup.png)
+![ipsec](../assets/zsc-ipsec/ipsec-setup.png){ loading=lazy }
 
 ## Prerequisites
 
@@ -331,7 +331,7 @@ In this setup, each server builds its own tunnels to Zscaler, and the load balan
 
 On the ILB, set up a load balancing rule for TCP port `10101` to the backend VMs. Return the ILB frontend IP in the PAC file statement for the clients. Azure Load balancer will never SNAT, so client IPs are visible on the backend VMs (e.g. for `tcpdump` to capture)
 
-![ipsec-ha](../assets/zsc-ipsec/ipsec-lb.png)
+![ipsec-ha](../assets/zsc-ipsec/ipsec-lb.png){ loading=lazy }
 
 ## Netdata Libreswan Monitoring
 

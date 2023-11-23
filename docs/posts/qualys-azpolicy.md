@@ -317,9 +317,9 @@ Qualys also provides an ARM template for agent deployment on [:simple-github: Gi
 
 1. Create the assignment and set scope
 2. Specify required parameters
-![assignment1](../assets/qualys-azpolicy/assignment1.png)
+![assignment1](../assets/qualys-azpolicy/assignment1.png){ loading=lazy }
 3. Specify managed identity, don't create a remediation task yet
-![assignment2](../assets/qualys-azpolicy/assignment2.png)
+![assignment2](../assets/qualys-azpolicy/assignment2.png){ loading=lazy }
 
 ### Managed Identity and RBAC
 
@@ -343,23 +343,23 @@ Microsoft.Compute/virtualMachines/extensions/write
 ## Remediation Task
 
 1. To remediate existing resources, create a remediation task. Choose the policy assignment to remediate:
-![remed1](../assets/qualys-azpolicy/remed1.png)
+![remed1](../assets/qualys-azpolicy/remed1.png){ loading=lazy }
 
 2. The task should show the resources that need remediation on the bottom, if the evaluation has not happened, check the `Re-evaluate resource compliance before remediating`. The remediation task with re-evaluation enabled takes about ~15-30min longer to complete
-![remed2](../assets/qualys-azpolicy/remed2.png)
+![remed2](../assets/qualys-azpolicy/remed2.png){ loading=lazy }
 
 3. When the task is completed, it shows succeeded and failed resources
-![remed3](../assets/qualys-azpolicy/remed3.png)
+![remed3](../assets/qualys-azpolicy/remed3.png){ loading=lazy }
 
 ## Deployment Success
 
 - [x] Extension status is `Provisioning Succeeded`:
 
-![depl2](../assets/qualys-azpolicy/depl2.png)
+![depl2](../assets/qualys-azpolicy/depl2.png){ loading=lazy }
 
 - [x] Server is visible in the Qualys Portal:
 
-![depl1](../assets/qualys-azpolicy/depl1.png)
+![depl1](../assets/qualys-azpolicy/depl1.png){ loading=lazy }
 
 ## Troubleshooting Deployment Errors
 
@@ -368,11 +368,11 @@ Deployment errors are displayed in the remediation task. In the example below, `
 
 If encountering problems with the agent, you might want to take a look at the [agent logs](#agent-logs)
 ??? example "Example: Rocky Linux not supported"
-    ![remed4](../assets/qualys-azpolicy/remed4.png)
+    ![remed4](../assets/qualys-azpolicy/remed4.png){ loading=lazy }
 
     Checking the install script mentioned in the error message shows the following regex:
 
-    ![remed5](../assets/qualys-azpolicy/remed5.png)
+    ![remed5](../assets/qualys-azpolicy/remed5.png){ loading=lazy }
 
     The install script (`/var/lib/waagent/Qualys.QualysAgentLinux-1.6.1.4/bin/avme_install.sh`) will check for `/etc/redhat-release` and match to a regex. This regex does currently not include `Rocky Linux`. The problem will be fixed in December 2023 according to Qualys
 

@@ -51,6 +51,7 @@ plugins:
   - tags:
       tags_file: tags.md
   - social
+  - glightbox
 
 markdown_extensions:
   - abbr

@@ -190,7 +190,7 @@ This configuration uses the predefined `nxtools` [:octicons-link-external-16: DS
 ???+ tip
     To get rid of the `constrainedLanguage` vscode error in the dev container, import DSC with `import-module PSDesiredStateConfiguration` in the container terminal.
 
-    ![policy](../assets/guestconfig/languageconstraints.png)
+    ![policy](../assets/guestconfig/languageconstraints.png){ loading=lazy }
 
 ### Guest Configuration Package Building
 

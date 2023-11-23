@@ -79,7 +79,7 @@ The following needs to be created in the Zscaler portal:
  - VPN Credentials
  - Location (static IPs and VPN credentials need to be referenced here)
 
-![loc](../assets/zsc-vpngw/zscaler-location.png)
+![loc](../assets/zsc-vpngw/zscaler-location.png){ loading=lazy }
 
 ## Default Route Environment
 
@@ -181,7 +181,7 @@ The config file will enable IP forwarding, set the `iptables`rules and make thos
 
 IP forwarding also needs to be enabled on the network interface resource in Azure:
 
-![ipfwd](../assets/zsc-vpngw/ipfwd.png)
+![ipfwd](../assets/zsc-vpngw/ipfwd.png){ loading=lazy }
 
 #### NVA as VMSS
 
@@ -194,11 +194,11 @@ The Linux NVA can also be deployed as a VMSS, with that we can achieve scalabili
 
 - On spoke VM add the NVA IP as a proxy server:
 
-![pac](../assets/zsc-vpngw/pac.png)
+![pac](../assets/zsc-vpngw/pac.png){ loading=lazy }
 
 - Check connectivity at `http://ip.zscaler.com`:
 
-![ipzscaler](../assets/zsc-vpngw/ip-zscaler-com.png)
+![ipzscaler](../assets/zsc-vpngw/ip-zscaler-com.png){ loading=lazy }
 
 A packet capture on the NVA confirms the NAT is working:
 

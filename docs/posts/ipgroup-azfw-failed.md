@@ -60,11 +60,11 @@ graph
 
 When updating an IP Group with additional IP addresses, it somehow failed:
 
-![ipgr1](../assets/ipgroup-azfw/ipgr1.png)
+![ipgr1](../assets/ipgroup-azfw/ipgr1.png){ loading=lazy }
 
 `AZ-GLOBAL-VHUB-AFW-POLICY` is the parent policy and utilizes IP Groups in 'Failed' state and is not modifyable anymore. Updates to rule collections fail with the error message: `Put on Firewall Policy AZ-GLOBAL-VHUB-AFW-POLICY Failed with 1 faulted referenced firewalls`
 
-![global-failed](../assets/ipgroup-azfw/global_failed.png)
+![global-failed](../assets/ipgroup-azfw/global_failed.png){ loading=lazy }
 
 List of all IP Groups:
 
@@ -124,7 +124,7 @@ In our case, `AzureFirewall_NEUR-VHUB01` was the affected AzFW resource.
 
 `AZ-GLOBAL-VHUB-AFW-POLICY` was disconnected from `AZ-NEUR-VHUB-AFW-POLICY` as the parent policy
 
-![pol1](../assets/ipgroup-azfw/pol1.png)
+![pol1](../assets/ipgroup-azfw/pol1.png){ loading=lazy }
 
 !!! danger "Important"
     The parent policy should now be modifyable again (Succeeded state)
@@ -143,7 +143,7 @@ To remove the problematic IP Groups from the policy, IP Groups were replaced wit
 
 This was successful, the failed IP Groups were not used anymore and the parent policy went into 'Succeeded' state
 
-![pol2](../assets/ipgroup-azfw/pol2.png)
+![pol2](../assets/ipgroup-azfw/pol2.png){ loading=lazy }
 
 All resources - parent policy, child policy and firewall - should be in 'Succeeded' state by now
 
@@ -151,7 +151,7 @@ All resources - parent policy, child policy and firewall - should be in 'Succeed
 
 The parent policy can now be associated to the child policy again
 
-![pol3](../assets/ipgroup-azfw/pol3.png)
+![pol3](../assets/ipgroup-azfw/pol3.png){ loading=lazy }
 
 !!! important
     When re-connecting parent and child policy, different policy settings for TLS Inspection, IDPS, Threat Intelligence, DNS Proxy can cause the operation to fail. In this case, disconnect policies again, adjust settings, try again. I have not found an indicator or error message that could point me into the right direction to locate the problem here - I got it working through trial and error.

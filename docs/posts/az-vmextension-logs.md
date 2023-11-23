@@ -45,7 +45,7 @@ This is a collection of links and file locations used to troubleshoot various Az
 
     | Name | Location |
     |---|---|
-    | Name | `VMAgent` (1) |
+    | Name | `WindowsVMAgent` (1) |
     | Log file | `C:\WindowsAzure\Logs\WaAppAgent.log` |
     | Installer logs | `C:\WindowsAzure\Logs\TransparentInstaller.log` |
     | Extension logs | `C:\WindowsAzure\Logs\Plugins\` |
@@ -71,7 +71,7 @@ This is a collection of links and file locations used to troubleshoot various Az
 
 ## Azure Arc Connected Machine Agent
 
-![](https://learn.microsoft.com/en-us/azure/azure-arc/servers/media/agent-overview/connected-machine-agent.png)
+![](https://learn.microsoft.com/en-us/azure/azure-arc/servers/media/agent-overview/connected-machine-agent.png){ loading=lazy }
 
 [:octicons-link-external-16: https://learn.microsoft.com/en-us/azure/azure-arc/servers/agent-overview](https://learn.microsoft.com/en-us/azure/azure-arc/servers/agent-overview){target="_blank"}
 
@@ -82,6 +82,10 @@ This is a collection of links and file locations used to troubleshoot various Az
 [:octicons-link-external-16: https://learn.microsoft.com/en-us/azure/azure-arc/servers/azcmagent-check](https://learn.microsoft.com/en-us/azure/azure-arc/servers/azcmagent-check){target="_blank"}
 
 [:octicons-link-external-16: https://learn.microsoft.com/en-us/azure/azure-arc/servers/agent-overview#agent-resources](https://learn.microsoft.com/en-us/azure/azure-arc/servers/agent-overview#agent-resources){target="_blank"}
+
+Arc enabled servers support the extensions listed in the links for [:octicons-link-external-16: Windows](https://learn.microsoft.com/en-us/azure/azure-arc/servers/manage-vm-extensions#windows-extensions) and [:octicons-link-external-16: Linux](https://learn.microsoft.com/en-us/azure/azure-arc/servers/manage-vm-extensions#linux-extensions). 
+
+For example, the Qualys extension used in [:octicons-link-external-16: the article on how to deploy the Qualys extension with Azure Policy](qualys-azpolicy.md){target="_blank"} is not available for arc enabled servers.
 
 === "Windows"
     <div class="annotate" markdown>
@@ -183,6 +187,8 @@ azcmagent check --location "westeurope" -v
     ```
 
 ## Guest Configuration Extension
+
+My first steps in diving into Azure Guestconfiguration (Azure Automanage Machine Configuration) are written down in [:octicons-link-external-16: part 1](az-guestconfig-p1.md) and [:octicons-link-external-16: part 2](az-guestconfig-p2.md).
 
 [:octicons-link-external-16: https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview](https://learn.microsoft.com/en-us/azure/governance/machine-configuration/overview){target="_blank"}
 
