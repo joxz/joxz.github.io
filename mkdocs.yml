@@ -33,7 +33,7 @@ theme:
     - content.code.copy
     - content.tabs.link
   icon:
-    annotation: material/arrow-right-circle
+    annotation: material/information
   custom_dir: overrides
 
 plugins:
@@ -70,7 +70,10 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.tabbed:
       alternate_style: true 
