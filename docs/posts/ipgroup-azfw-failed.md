@@ -24,8 +24,8 @@ In my recent case, this happened in a parent/child policy setup. Traffic was sti
     General procedure:
 
     - Disconnect child from failed parent policy
-    - `PUT` operation to get the AzFW in 'Succeeded' state
     - `PUT` operation to get the parent policy in 'Succeeded' state
+    - (optional, if needed) `PUT` operation to get the AzFW in 'Succeeded' state
     - If everyhting is in 'Succeeded' state, attach child to parent policy again
 
 <!-- more -->
@@ -132,7 +132,7 @@ In our case, `AzureFirewall_NEUR-VHUB01` was the affected AzFW resource.
     If the parent policy is still failed, a `PUT` operation[^1] can be used to get to 'Succeeded' state:
 
     ``` pwsh
-    Get-AzFirewall -Name "AZ-GLOBAL-VHUB-AFW-POLICY" -ResourceGroupName "AZ-GLOBAL-NETWORK-RG01" | Set-AzFirewall
+    Get-AzFirewallPolicy -Name "AZ-GLOBAL-VHUB-AFW-POLICY" -ResourceGroupName "AZ-GLOBAL-NETWORK-RG01" | Set-AzFirewallPolicy
     ```
 
     In some cases this has to be done several times.
