@@ -699,8 +699,8 @@
 <p>General procedure:</p>
 <ul>
 <li>Disconnect child from failed parent policy</li>
-<li><code>PUT</code> operation to get the AzFW in 'Succeeded' state</li>
 <li><code>PUT</code> operation to get the parent policy in 'Succeeded' state</li>
+<li>(optional, if needed) <code>PUT</code> operation to get the AzFW in 'Succeeded' state</li>
 <li>If everyhting is in 'Succeeded' state, attach child to parent policy again</li>
 </ul>
 </div>
@@ -783,7 +783,7 @@
 <p class="admonition-title">Important</p>
 <p>The parent policy should now be modifyable again (Succeeded state)</p>
 <p>If the parent policy is still failed, a <code>PUT</code> operation<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> can be used to get to 'Succeeded' state:</p>
-<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Get-AzFirewall</span> <span class="n">-Name</span> <span class="s2">&quot;AZ-GLOBAL-VHUB-AFW-POLICY&quot;</span> <span class="n">-ResourceGroupName</span> <span class="s2">&quot;AZ-GLOBAL-NETWORK-RG01&quot;</span> <span class="p">|</span> <span class="nb">Set-AzFirewall</span>
+<div class="language-pwsh highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Get-AzFirewallPolicy</span> <span class="n">-Name</span> <span class="s2">&quot;AZ-GLOBAL-VHUB-AFW-POLICY&quot;</span> <span class="n">-ResourceGroupName</span> <span class="s2">&quot;AZ-GLOBAL-NETWORK-RG01&quot;</span> <span class="p">|</span> <span class="nb">Set-AzFirewallPolicy</span>
 </span></code></pre></div>
 <p>In some cases this has to be done several times.</p>
 </div>
